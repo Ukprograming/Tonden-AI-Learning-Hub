@@ -11,7 +11,6 @@
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700"
   />
-  <!-- Inter (任意) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
     rel="stylesheet"
@@ -46,15 +45,10 @@
     };
   </script>
 
-  <!-- ここは通常の <style> でOK（Tailwind特有の処理は不要） -->
   <style>
-    .slide-container .navigation {
-      display: none;
-    }
-  </style>
+    /* 既存 */
+    .slide-container .navigation { display: none; }
 
-  <!-- カスタムCSS -->
-  <style>
     /* Base font smoothing */
     body {
       -webkit-font-smoothing: antialiased;
@@ -75,9 +69,7 @@
       background-clip: text;
       text-fill-color: transparent;
     }
-    .title-highlight {
-      position: relative; display: inline-block;
-    }
+    .title-highlight { position: relative; display: inline-block; }
     .title-highlight::after {
       content: '';
       position: absolute; bottom: 5px; left: 0;
@@ -94,7 +86,38 @@
 </head>
 
 <body class="font-body">
-  <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+  <!-- === ツールバー / ナビゲーション（固定表示） === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-14 flex items-center justify-between">
+        <!-- サイトタイトル -->
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AL</span> Learning Hub
+          </span>
+        </a>
+        <!-- ナビボタン -->
+        <nav class="flex items-center gap-2">
+          <!-- 必要に応じて href を差し替えてください -->
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
+            ホーム
+          </a>
+          <a href="./slides.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
+            研修スライド
+          </a>
+          <a href="./demos.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
+            デモ用コンテンツ
+          </a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
+            復習用コンテンツ
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- コンテンツ全体に上余白（固定ヘッダーの分）を追加 -->
+  <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden pt-16">
     <div class="layout-container flex h-full grow flex-col">
       <main class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-10 md:py-16">
         <div class="layout-content-container flex flex-col w-full max-w-5xl">
@@ -161,9 +184,9 @@
     </div>
   </div>
 
-  <!-- スライドデータ & 連動スクリプト -->
+  <!-- スライドデータ & 連動スクリプト（元のまま） -->
   <script>
-    const slidesData = [
+     const slidesData = [
       { content: `
         <div class="w-full h-full gradient-bg flex flex-col justify-center items-center text-center p-8">
           <div class="bg-white/70 backdrop-blur-sm p-8 rounded-xl shadow-lg">
@@ -494,4 +517,3 @@
   </script>
 </body>
 </html>
-
