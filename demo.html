@@ -40,19 +40,15 @@
   <!-- === 固定ツールバー === -->
   <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
     <div class="max-w-7xl mx-auto px-4 md:px-8">
-      <!-- ヘッダーの高さを h-16 に統一 -->
       <div class="h-16 flex items-center justify-between">
-        <!-- サイトタイトル -->
         <a href="./" class="flex items-center gap-2 group">
           <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
             Tonden <span class="text-primary">AI</span> Learning Hub
           </span>
         </a>
-        <!-- ナビボタン -->
         <nav class="flex items-center gap-2">
           <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
           <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
-          <!-- このページをアクティブ表示 -->
           <a href="./demo.html" aria-current="page" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary hover:bg-primary/15 dark:text-primary transition-colors">デモ用コンテンツ</a>
           <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
         </nav>
@@ -60,7 +56,6 @@
     </div>
   </header>
 
-  <!-- 固定ヘッダー分の余白を本文に付与（pt-16 = 64px） -->
   <div class="min-h-screen pt-16">
     <main class="flex justify-center py-10 lg:py-16">
       <div class="w-full max-w-5xl px-4 md:px-8">
@@ -93,14 +88,11 @@
                     この音声解説では、各デモのポイントや、教育現場でどのように活用できるかのヒントを解説しています。デモを操作しながらお聴きいただくことで、AIの可能性をより深く理解できます。
                   </p>
                   <div class="mt-4">
-                    <!-- ▼ 音声ファイルを同一リポジトリに置いた場合の例 -->
-                    <!-- 例: /assets/audio/slide-commentary.mp3 をコミットしてください -->
                     <audio class="w-full" controls preload="metadata">
                       <source src="./assets/audio/slide-commentary.m4a" type="audio/mp4">
                       お使いのブラウザは音声再生に対応していません。
                       <a href="./assets/audio/slide-commentary.m4a" download>音声をダウンロード</a>
                     </audio>
-                    <!-- ▲ 必要に応じて上記パスを書き換えてください -->
                   </div>
                 </div>
               </div>
@@ -258,6 +250,33 @@
             </div>
           </div>
 
+          <!-- 共有・運用（追加セクション） -->
+          <div class="rounded-xl border border-neutral-200/80 bg-white dark:border-neutral-800 dark:bg-neutral-900/50 shadow-sm">
+            <div class="p-6">
+              <h3 class="flex items-center gap-3 text-2xl font-bold text-neutral-900 dark:text-white">
+                <span class="material-symbols-outlined text-primary text-3xl">share</span>
+                <span>共有・運用</span>
+              </h3>
+            </div>
+            <div class="border-t border-neutral-200/80 dark:border-neutral-800 p-6">
+              <div class="space-y-6">
+                <div class="rounded-lg border border-primary/20 bg-primary/5 p-5">
+                  <h4 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100">自分専用メルマガの受信</h4>
+                  <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+                    興味のある分野の最新情報を、AIがまとめて毎日届けてくれます。
+                  </p>
+                </div>
+                <div class="rounded-lg border border-primary/20 bg-primary/5 p-5">
+                  <h4 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100">課題の自動配信</h4>
+                  <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+                    設定したルールに基づき、学習者に課題を自動で配信・管理します。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /共有・運用 -->
+
         </div>
       </div>
     </main>
@@ -265,7 +284,6 @@
 
   <!-- URL一括管理スクリプト -->
   <script>
-    // 後から値を入れてください（空文字は「準備中」扱い）
     const DEMO_URLS = {
       "deepresearch":      "",
       "notebooklm":        "",
@@ -282,21 +300,16 @@
       "youngs-experiment": "https://ukprograming.github.io/Young-s-double-slit-experiment/"
     };
 
-    // すべての「デモを見る」にURLを配線（空は無効化）
+    // ★「常に新しいタブで開く」ように変更
     document.querySelectorAll('a.demo-link[data-key]').forEach(a => {
       const key = a.dataset.key;
       const url = (DEMO_URLS[key] || "").trim();
 
       if (url) {
         a.href = url;
-        // 外部リンクなら新規タブ（簡易判定）
-        const isExternal = /^https?:\/\//i.test(url) && !url.includes(location.hostname);
-        if (isExternal) {
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-        }
+        a.target = "_blank";                 // ここを常時付与
+        a.rel = "noopener noreferrer";       // セキュリティのために付与
       } else {
-        // 準備中の見た目と挙動
         a.removeAttribute('href');
         a.classList.add('opacity-50', 'pointer-events-none', 'no-underline');
         a.title = '準備中';
@@ -306,6 +319,3 @@
   </script>
 </body>
 </html>
-
-
-
