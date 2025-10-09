@@ -52,7 +52,8 @@
         <nav class="flex items-center gap-2">
           <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
           <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
-          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <!-- このページをアクティブ表示 -->
+          <a href="./demo.html" aria-current="page" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary hover:bg-primary/15 dark:text-primary transition-colors">デモ用コンテンツ</a>
           <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
         </nav>
       </div>
@@ -92,10 +93,15 @@
                     この音声解説では、各デモのポイントや、教育現場でどのように活用できるかのヒントを解説しています。デモを操作しながらお聴きいただくことで、AIの可能性をより深く理解できます。
                   </p>
                   <div class="mt-4">
-                    <audio class="w-full" controls>
-                      <source src="" type="audio/mpeg" />
-                      Your browser does not support the audio element.
+                    <!-- ▼ 音声ファイルを同一リポジトリに置いた場合の例 -->
+                    <!-- 例: /assets/audio/slide-commentary.mp3 をコミットしてください -->
+                    <audio class="w-full" controls preload="metadata">
+                      <source src="./assets/audio/slide-commentary.mp3" type="audio/mpeg">
+                      <source src="./assets/audio/slide-commentary.ogg" type="audio/ogg">
+                      お使いのブラウザは音声再生に対応していません。
+                      <a href="./assets/audio/slide-commentary.mp3" download>音声をダウンロード</a>
                     </audio>
+                    <!-- ▲ 必要に応じて上記パスを書き換えてください -->
                   </div>
                 </div>
               </div>
