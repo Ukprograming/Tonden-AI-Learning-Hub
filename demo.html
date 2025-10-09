@@ -1,65 +1,71 @@
 <!DOCTYPE html>
-<html lang="ja"><head>
-<meta charset="utf-8"/>
-<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
-<title>デモ用コンテンツ</title>
-<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          primary: "#13a4ec",
-          "background-light": "#f6f7f8",
-          "background-dark": "#101c22",
-        },
-        fontFamily: {
-          display: ["Space Grotesk"],
-          sans: ['Noto Sans', 'sans-serif'],
-        },
-        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
-      },
-    },
-  };
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-</head>
-<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
-  <!-- === ツールバー / ナビゲーション（固定表示） === -->
-<header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
-  <div class="max-w-7xl mx-auto px-4 md:px-8">
-    <div class="h-14 flex items-center justify-between">
-      <!-- サイトタイトル -->
-      <a href="./" class="flex items-center gap-2 group">
-        <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
-          Tonden <span class="text-primary">AI</span> Learning Hub
-        </span>
-      </a>
-      <!-- ナビボタン -->
-      <nav class="flex items-center gap-2">
-        <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
-        <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
-        <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
-        <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
-      </nav>
-    </div>
-  </div>
-</header>
-<!-- 例：ページ全体のラッパーに pt-16 を付ける -->
-<div class="relative min-h-screen pt-16">
-  <!-- ページの中身 -->
-</div>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>デモ用コンテンツ</title>
 
-<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-  <div class="layout-container flex h-full grow flex-col">
-    <main class="flex flex-1 justify-center py-10 lg:py-16">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 固定ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <!-- ヘッダーの高さを h-16 に統一 -->
+      <div class="h-16 flex items-center justify-between">
+        <!-- サイトタイトル -->
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <!-- ナビボタン -->
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 固定ヘッダー分の余白を本文に付与（pt-16 = 64px） -->
+  <div class="min-h-screen pt-16">
+    <main class="flex justify-center py-10 lg:py-16">
       <div class="w-full max-w-5xl px-4 md:px-8">
         <div class="mb-12 text-center">
-          <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white md:text-5xl font-display">AIデモコンテンツ</h1>
-          <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-500 dark:text-neutral-400">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white">AIデモコンテンツ</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300">
             AIの力をインタラクティブなデモで体験してみましょう。これらのツールは、AIをシンプルで魅力的な方法で理解し、体験できるように設計されています。
           </p>
         </div>
@@ -87,7 +93,7 @@
                   </p>
                   <div class="mt-4">
                     <audio class="w-full" controls>
-                      <source src="" type="audio/mpeg"/>
+                      <source src="" type="audio/mpeg" />
                       Your browser does not support the audio element.
                     </audio>
                   </div>
@@ -251,50 +257,47 @@
       </div>
     </main>
   </div>
-</div>
 
-<!-- ▼ ここから：URL一括管理スクリプト（空欄で用意） -->
-<script>
-  // 後から値を入れてください（空文字は「準備中」扱い）
-  const DEMO_URLS = {
-    "deepresearch":      "",
-    "notebooklm":        "",
-    "nano-banana":       "",
-    "storybook":         "",
-    "google-ai-search":  "",
-    "similar-text":      "",
-    "word-app":          "https://ukprograming.github.io/ja-en-test/",
-    "map-puzzle":        "https://ukprograming.github.io/world-map-puzzle/",
-    "completing-square": "https://ts9460ts-source.github.io/heiho1/",
-    "music-cards":       "https://norisuke1104-lab.github.io/music_card/",
-    "rail-track-sim":    "https://ukprograming.github.io/RailTrack-Simulator/",
-    "adc-sim":           "https://sites.google.com/hokkaido-c.ed.jp/digital2509?usp=sharing",
-    "youngs-experiment": "https://ukprograming.github.io/Young-s-double-slit-experiment/"
-  };
+  <!-- URL一括管理スクリプト -->
+  <script>
+    // 後から値を入れてください（空文字は「準備中」扱い）
+    const DEMO_URLS = {
+      "deepresearch":      "",
+      "notebooklm":        "",
+      "nano-banana":       "",
+      "storybook":         "",
+      "google-ai-search":  "",
+      "similar-text":      "",
+      "word-app":          "https://ukprograming.github.io/ja-en-test/",
+      "map-puzzle":        "https://ukprograming.github.io/world-map-puzzle/",
+      "completing-square": "https://ts9460ts-source.github.io/heiho1/",
+      "music-cards":       "https://norisuke1104-lab.github.io/music_card/",
+      "rail-track-sim":    "https://ukprograming.github.io/RailTrack-Simulator/",
+      "adc-sim":           "https://sites.google.com/hokkaido-c.ed.jp/digital2509?usp=sharing",
+      "youngs-experiment": "https://ukprograming.github.io/Young-s-double-slit-experiment/"
+    };
 
-  // すべての「デモを見る」にURLを配線（空は無効化）
-  document.querySelectorAll('a.demo-link[data-key]').forEach(a => {
-    const key = a.dataset.key;
-    const url = (DEMO_URLS[key] || "").trim();
+    // すべての「デモを見る」にURLを配線（空は無効化）
+    document.querySelectorAll('a.demo-link[data-key]').forEach(a => {
+      const key = a.dataset.key;
+      const url = (DEMO_URLS[key] || "").trim();
 
-    if (url) {
-      a.href = url;
-
-      // 外部リンクなら新規タブ（簡易判定）
-      const isExternal = /^https?:\/\//i.test(url) && !url.includes(location.hostname);
-      if (isExternal) {
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
+      if (url) {
+        a.href = url;
+        // 外部リンクなら新規タブ（簡易判定）
+        const isExternal = /^https?:\/\//i.test(url) && !url.includes(location.hostname);
+        if (isExternal) {
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+        }
+      } else {
+        // 準備中の見た目と挙動
+        a.removeAttribute('href');
+        a.classList.add('opacity-50', 'pointer-events-none', 'no-underline');
+        a.title = '準備中';
+        a.textContent = '準備中';
       }
-    } else {
-      // 準備中の見た目と挙動
-      a.removeAttribute('href');
-      a.classList.add('opacity-50','pointer-events-none','no-underline');
-      a.title = '準備中';
-      a.textContent = '準備中';
-    }
-  });
-</script>
-<!-- ▲ ここまで -->
-</body></html>
-
+    });
+  </script>
+</body>
+</html>
