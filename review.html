@@ -1,92 +1,177 @@
 <!DOCTYPE html>
-<html lang="ja"><head>
-<meta charset="utf-8"/>
-<meta charset="utf-8"/>
-<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
-<title>Stitch Design</title>
-<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              primary: '#13a4ec',
-              'background-light': '#f6f7f8',
-              'background-dark': '#101c22'
-            },
-            fontFamily: {
-              display: ['Space Grotesk']
-            },
-            borderRadius: {
-              DEFAULT: '0.25rem',
-              lg: '0.5rem',
-              xl: '0.75rem',
-              full: '9999px'
-            }
-          }
-        }
-      };
-    </script>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>復習用コンテンツ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        },
+      },
+    };
+  </script>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-[#101c22] dark:text-[#f6f7f8]">
-<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-<div class="flex h-full grow flex-col">
-<main class="flex-1">
-<div class="w-full max-w-5xl mx-auto px-4 py-12">
-<div class="mb-12 text-center pt-8">
-<h1 class="text-4xl font-bold tracking-tight text-primary">AI研修 復習コンテンツ</h1>
-<p class="mt-2 text-lg text-[#101c22]/70 dark:text-[#f6f7f8]/70">研修内容の復習に役立つ資料やリンクを集約したページです。</p>
-</div>
-<div class="space-y-12">
-<div>
-<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-<a class="group flex items-center gap-4 rounded-lg bg-background-light p-6 shadow-sm ring-1 ring-inset ring-primary/10 transition-all hover:bg-primary/10 hover:ring-primary/30 dark:bg-background-dark dark:ring-primary/20 dark:hover:bg-primary/20 dark:hover:ring-primary/40" href="#">
-<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-<svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px" xmlns="http://www.w3.org/2000/svg">
-<path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"></path>
-</svg>
-</div>
-<h3 class="text-lg font-bold">研修スライド</h3>
-</a>
-<a class="group flex items-center gap-4 rounded-lg bg-background-light p-6 shadow-sm ring-1 ring-inset ring-primary/10 transition-all hover:bg-primary/10 hover:ring-primary/30 dark:bg-background-dark dark:ring-primary/20 dark:hover:bg-primary/20 dark:hover:ring-primary/40" href="#">
-<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-<svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px" xmlns="http://www.w3.org/2000/svg">
-<path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176Z"></path>
-</svg>
-</div>
-<h3 class="text-lg font-bold">デモ用コンテンツ</h3>
-</a>
-</div>
-</div>
-<div>
-<h3 class="mb-4 text-xl font-bold tracking-tight">研修のまとめ</h3>
-<div class="grid grid-cols-1 gap-6">
-<a class="group rounded-lg bg-background-light p-6 shadow-sm ring-1 ring-inset ring-primary/10 transition-all hover:bg-primary/10 hover:ring-primary/30 dark:bg-background-dark dark:ring-primary/20 dark:hover:bg-primary/20 dark:hover:ring-primary/40" href="#">
-<div class="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-<div class="mb-4 h-48 w-full shrink-0 rounded-lg bg-cover bg-center bg-no-repeat sm:mb-0 sm:h-32 sm:w-48" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBH86DA2THdEGL9BwkhhvSF_ftFJ2Jb-7eG_WzoqDNbChVWJztkWsBhhKU0eEWrDXwxyi75T71Gcl7HNFPHW5PTNQgoXajcDXdrubtvzPWp40cd6ZQeyu9FyX-rhuPlxMJHZRv0kvl40AladBhHHbay-dtP5peZXQ6vlT71qGrQ4iPV5mGix1oYbDmnXXTtrdjL51nbhaiBflqe_zsGbmcdGGhI5BxEoC7iZ7cvCvhBORkccdcIOFMuN8KaKNI_qYeWNHeLsVkPxvM');"></div>
-<div>
-<h4 class="text-lg font-bold">AI使用上の注意</h4>
-<p class="mt-1 text-[#101c22]/70 dark:text-[#f6f7f8]/70">AIを安全かつ効果的に活用するためのガイドラインと注意点を解説します。</p>
-</div>
-</div>
-</a>
-<a class="group rounded-lg bg-background-light p-6 shadow-sm ring-1 ring-inset ring-primary/10 transition-all hover:bg-primary/10 hover:ring-primary/30 dark:bg-background-dark dark:ring-primary/20 dark:hover:bg-primary/20 dark:hover:ring-primary/40" href="#">
-<div class="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-<div class="mb-4 h-48 w-full shrink-0 rounded-lg bg-cover bg-center bg-no-repeat sm:mb-0 sm:h-32 sm:w-48" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBH86DA2THdEGL9BwkhhvSF_ftFJ2Jb-7eG_WzoqDNbChVWJztkWsBhhKU0eEWrDXwxyi75T71Gcl7HNFPHW5PTNQgoXajcDXdrubtvzPWp40cd6ZQeyu9FyX-rhuPlxMJHZRv0kvl40AladBhHHbay-dtP5peZXQ6vlT71qGrQ4iPV5mGix1oYbDmnXXTtrdjL51nbhaiBflqe_zsGbmcdGGhI5BxEoC7iZ7cvCvhBORkccdcIOFMuN8KaKNI_qYeWNHeLsVkPxvM');"></div>
-<div>
-<h4 class="text-lg font-bold">デモ用コンテンツの活用法</h4>
-<p class="mt-1 text-[#101c22]/70 dark:text-[#f6f7f8]/70">デモコンテンツを実際に操作しながら、AIの可能性を体験してみましょう。</p>
-</div>
-</div>
-</a>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-</div>
-</body></html>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 固定ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <!-- サイトタイトル -->
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <!-- ナビボタン -->
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 固定ヘッダー分の余白 -->
+  <div class="min-h-screen pt-16">
+    <main class="flex justify-center py-10 lg:py-16">
+      <div class="w-full max-w-5xl px-4 md:px-8">
+        <!-- ヘッダー -->
+        <div class="mb-10 text-center">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white">復習用コンテンツ</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300">
+            研修で扱ったスライド・デモ・配布資料・音声などをまとめています。必要に応じて随時更新します。
+          </p>
+        </div>
+
+        <div class="space-y-10">
+          <!-- スライド再掲 -->
+          <section class="rounded-xl border border-neutral-200/80 bg-white dark:border-neutral-800 dark:bg-neutral-900/50 shadow-sm">
+            <div class="p-6 flex items-center justify-between">
+              <h2 class="flex items-center gap-3 text-2xl font-bold text-neutral-900 dark:text-white">
+                <span class="material-symbols-outlined text-primary text-3xl">slideshow</span>
+                研修スライド
+              </h2>
+              <a href="./slide.html" class="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                開く <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+            </div>
+            <div class="border-t border-neutral-200/80 dark:border-neutral-800 p-6">
+              <p class="text-neutral-700 dark:text-neutral-300">
+                研修で使用したスライドのブラウザ版です。キーボードの左右キーでも移動できます。
+              </p>
+            </div>
+          </section>
+
+          <!-- デモ一覧への導線 -->
+          <section class="rounded-xl border border-neutral-200/80 bg-white dark:border-neutral-800 dark:bg-neutral-900/50 shadow-sm">
+            <div class="p-6 flex items-center justify-between">
+              <h2 class="flex items-center gap-3 text-2xl font-bold text-neutral-900 dark:text-white">
+                <span class="material-symbols-outlined text-primary text-3xl">rocket_launch</span>
+                デモ用コンテンツ
+              </h2>
+              <a href="./demo.html" class="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                一覧を見る <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+            </div>
+            <div class="border-t border-neutral-200/80 dark:border-neutral-800 p-6">
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <li class="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/70 dark:border-neutral-800">
+                  <p class="font-semibold">探索・選別・構造化</p>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">DeepResearch / NotebookLM など</p>
+                </li>
+                <li class="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/70 dark:border-neutral-800">
+                  <p class="font-semibold">制作</p>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">画像生成・絵本・類題作成・旅行行程作成 など</p>
+                </li>
+                <li class="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/70 dark:border-neutral-800">
+                  <p class="font-semibold">ノーコードで作るアプリ/シミュレーション</p>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">英単語・地図パズル・平方完成・音楽カード・レールトラック・A/D変換・ヤングの実験</p>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- 配布資料（任意：URLを後で差し替え） -->
+          <section class="rounded-xl border border-neutral-200/80 bg-white dark:border-neutral-800 dark:bg-neutral-900/50 shadow-sm">
+            <div class="p-6">
+              <h2 class="flex items-center gap-3 text-2xl font-bold text-neutral-900 dark:text-white">
+                <span class="material-symbols-outlined text-primary text-3xl">folder_open</span>
+                配布資料・リンク集
+              </h2>
+            </div>
+            <div class="border-t border-neutral-200/80 dark:border-neutral-800 p-6">
+              <ul class="space-y-3 text-primary">
+                <!-- 空リンクは準備中表示にしておくと親切です -->
+                <li>
+                  <a href="#" class="pointer-events-none opacity-50 no-underline text-primary">
+                    研修サマリー（PDF）— 準備中
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="pointer-events-none opacity-50 no-underline text-primary">
+                    参考リンク集 — 準備中
+                  </a>
+                </li>
+              </ul>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+                ※ URLは後日更新します。準備ができ次第、クリックできるようになります。
+              </p>
+            </div>
+          </section>
+
+          <!-- 音声解説（任意） -->
+          <section class="rounded-xl border border-neutral-200/80 bg-white dark:border-neutral-800 dark:bg-neutral-900/50 shadow-sm">
+            <div class="p-6">
+              <h2 class="flex items-center gap-3 text-2xl font-bold text-neutral-900 dark:text-white">
+                <span class="material-symbols-outlined text-primary text-3xl">mic</span>
+                音声解説（復習用）
+              </h2>
+            </div>
+            <div class="border-t border-neutral-200/80 dark:border-neutral-800 p-6">
+              <audio class="w-full" controls>
+                <source src="" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+                ※ 音源が未設定の場合は再生できません。準備でき次第URLを設定してください。
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <!-- フッターノート -->
+        <p class="text-center text-xs text-neutral-500 dark:text-neutral-400 mt-12">
+          © Tonden AI Learning Hub
+        </p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
