@@ -28,6 +28,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === ツールバー / ナビゲーション（固定表示） === -->
+<header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+  <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <div class="h-14 flex items-center justify-between">
+      <!-- サイトタイトル -->
+      <a href="./" class="flex items-center gap-2 group">
+        <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+          Tonden <span class="text-primary">AI</span> Learning Hub
+        </span>
+      </a>
+      <!-- ナビボタン -->
+      <nav class="flex items-center gap-2">
+        <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+        <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+        <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+        <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- 例：ページ全体のラッパーに pt-16 を付ける -->
+<div class="relative min-h-screen pt-16">
+  <!-- ページの中身 -->
+</div>
+
 <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
   <div class="layout-container flex h-full grow flex-col">
     <main class="flex flex-1 justify-center py-10 lg:py-16">
@@ -272,3 +297,4 @@
 </script>
 <!-- ▲ ここまで -->
 </body></html>
+
