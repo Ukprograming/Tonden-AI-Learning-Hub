@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stitch Design</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700"
+  />
+  <!-- Inter (任意) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans JP", "sans-serif"],
+            body: ["Inter", "Noto Sans JP", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ここは通常の <style> でOK（Tailwind特有の処理は不要） -->
+  <style>
+    .slide-container .navigation {
+      display: none;
+    }
+  </style>
+
+  <!-- カスタムCSS -->
+  <style>
+    /* Base font smoothing */
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Slide visibility */
+    .slide { display: none; }
+    .slide.active { display: flex; }
+
+    /* Visual accents */
+    .gradient-bg {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    .title-highlight {
+      position: relative; display: inline-block;
+    }
+    .title-highlight::after {
+      content: '';
+      position: absolute; bottom: 5px; left: 0;
+      width: 100%; height: 12px; background: #60a5fa; opacity: 0.3;
+      z-index: -1; transform: skew(-15deg);
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .icon-bg { background-color: #e0f2fe; }
+  </style>
+</head>
+
+<body class="font-body">
+  <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <main class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-10 md:py-16">
+        <div class="layout-content-container flex flex-col w-full max-w-5xl">
+          <div class="flex flex-col items-center text-center gap-4 mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-black dark:text-white font-display">研修スライド</h1>
+            <p class="text-lg text-black/60 dark:text-white/60 max-w-3xl">
+              AI研修プログラムのスライドです。AIについて、誰にとっても身近で魅力的なものになるようデザインされています。
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-8">
+            <!-- スライド表示部分 -->
+            <div class="w-full aspect-video bg-black/5 dark:bg-white/5 rounded-lg shadow-sm overflow-hidden slide-container">
+              <div id="presentation-container" class="w-full h-full bg-white dark:bg-neutral-900"></div>
+            </div>
+
+            <!-- ナビ -->
+            <div class="w-full flex justify-between items-center px-4">
+              <button id="prev-btn" class="flex items-center gap-2 text-black/60 dark:text-white/60 hover:text-primary dark:hover:text-primary transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span>前へ</span>
+              </button>
+
+              <p id="slide-counter" class="text-sm text-black/60 dark:text-white/60">スライド 1 / 15</p>
+
+              <button id="next-btn" class="flex items-center gap-2 text-black/60 dark:text-white/60 hover:text-primary dark:hover:text-primary transition-colors">
+                <span>次へ</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- 音声解説 -->
+            <div class="flex flex-col gap-4">
+              <h2 class="text-2xl font-bold tracking-tight text-black dark:text-white font-display text-center">音声解説</h2>
+              <div class="bg-white dark:bg-black/20 rounded-lg p-6 shadow-sm flex flex-col gap-4">
+                <div class="flex items-center gap-4">
+                  <button class="flex items-center justify-center rounded-full h-12 w-12 bg-primary text-white hover:bg-primary/90 transition-colors flex-shrink-0">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                  <div class="flex flex-col gap-1 w-full">
+                    <div class="flex justify-between items-center">
+                      <p class="font-medium text-black dark:text-white">スライド全体の音声解説</p>
+                      <p class="text-sm text-black/60 dark:text-white/60">12:34 / 45:10</p>
+                    </div>
+                    <div class="w-full h-2 bg-black/10 dark:bg-white/10 rounded-full">
+                      <div class="w-1/4 h-full bg-primary rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-sm text-black/80 dark:text-white/80">
+                  この音声解説では、スライド全体を通してAIの基本的な定義から、私たちの日常生活での活用例、そして未来の可能性について詳しく解説しています。
+                </p>
+              </div>
+            </div>
+          </div> <!-- /stack -->
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- スライドデータ & 連動スクリプト -->
+  <script>
+    const slidesData = [
+      { content: `
+        <div class="w-full h-full gradient-bg flex flex-col justify-center items-center text-center p-8">
+          <div class="bg-white/70 backdrop-blur-sm p-8 rounded-xl shadow-lg">
+            <h1 class="text-5xl md:text-6xl font-black gradient-text tracking-tight">生成AI研修</h1>
+            <p class="text-2xl md:text-3xl font-bold text-gray-700 mt-4">全3回 | 初回：活用領域を知る</p>
+          </div>
+          <p class="text-xl text-gray-600 mt-10 font-semibold bg-white/70 backdrop-blur-sm px-6 py-3 rounded-full shadow">2025年10月22日(水) 16:00 - 16:30</p>
+        </div>
+      `},
+      { title: "はじめに - 本研修の目的", content: `
+        <div class="p-8 md:p-12 space-y-8">
+          <div class="card p-6 rounded-xl shadow-lg border border-blue-100">
+            <h3 class="text-2xl font-bold text-blue-600 mb-3">本日の目的</h3>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-700">
+              具体例を通して生成AIの主要な活用領域を理解し、<br>
+              <span class="font-bold">皆さまの業務や授業での活用イメージを持っていただくこと</span>
+            </p>
+          </div>
+          <div class="card p-6 rounded-xl shadow-lg border border-green-100">
+            <h3 class="text-2xl font-bold text-green-600 mb-4">達成目標</h3>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <p class="text-lg text-gray-700">生成AIでできる代表的なことの<span class="font-bold">全体像を知る</span></p>
+              </div>
+              <div class="flex items-start">
+                <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <p class="text-lg text-gray-700">ご自身の業務・授業に即した<span class="font-bold">「まず試す」ユースケースを1つ以上メモする</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `},
+      { title: "研修の全体像と本日の位置づけ", content: `
+        <div class="p-8 md:p-12 space-y-6">
+          <div class="flex items-center p-6 rounded-xl shadow-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white transform scale-105">
+            <div class="text-4xl font-black mr-6">1</div>
+            <div>
+              <h3 class="text-2xl font-bold">第1回 (本日)：活用領域を知る</h3>
+              <p class="mt-1 opacity-90">生成AIで「何ができるのか」という全体像を掴みます。</p>
+            </div>
+          </div>
+          <div class="flex items-center p-6 rounded-xl shadow-lg bg-white/80 border">
+            <div class="text-4xl font-black mr-6 text-gray-400">2</div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-700">第2回：ノーコードで作るアプリ&シミュレーション</h3>
+              <p class="mt-1 text-gray-600">具体的なアプリ開発の手順やコツを学ぶワークショップです。<br><span class="font-semibold text-indigo-500">(予告) 11月5日(水) 開催予定</span></p>
+            </div>
+          </div>
+          <div class="flex items-center p-6 rounded-xl shadow-lg bg-white/80 border">
+            <div class="text-4xl font-black mr-6 text-gray-400">3</div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-700">第3回：(テーマ未定)</h3>
+            </div>
+          </div>
+        </div>
+      `},
+      { title: "本日の流れ (30分)", content: `
+        <div class="p-8 md:p-12">
+          <ul class="space-y-4 text-xl">
+            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">1.</span> <span class="font-bold">イントロ</span><span class="ml-auto text-gray-500 font-semibold"> (3分)</span></li>
+            <p class="pl-20 text-lg text-gray-600 -mt-2">目的、位置づけ、アジェンダの確認</p>
+
+            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">2.</span> <span class="font-bold">生成AIを利用する際の注意点</span><span class="ml-auto text-gray-500 font-semibold"> (5分)</span></li>
+
+            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">3.</span> <span class="font-bold">生成AIでできること</span><span class="ml-auto text-gray-500 font-semibold"> (15分)</span></li>
+            <p class="pl-20 text-lg text-gray-600 -mt-2">具体的な活用事例をデモ中心にご紹介します</p>
+
+            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">4.</span> <span class="font-bold">まとめ</span><span class="ml-auto text-gray-500 font-semibold"> (5分)</span></li>
+          </ul>
+        </div>
+      `},
+      { section: "2.", title: "生成AIを利用する際の注意点", content: `
+        <div class="p-8 md:p-12">
+          <p class="text-xl text-gray-600 mb-8">はじめに、安全かつ効果的に活用するための重要なポイント</p>
+          <div class="space-y-6">
+            <div class="card p-6 rounded-xl shadow-lg flex items-start">
+              <svg width="32" height="32" viewBox="0 0 24 24" class="text-blue-500 mr-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <div>
+                <h3 class="text-xl font-bold text-gray-800">道立学校における生成AI利活用ガイドブックの紹介</h3>
+                <p class="text-lg text-gray-600 mt-1">まずは基本となるルールを確認しましょう。</p>
+              </div>
+            </div>
+            <div class="card p-6 rounded-xl shadow-lg flex items-start">
+              <svg width="32" height="32" viewBox="0 0 24 24" class="text-amber-500 mr-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+              <div>
+                <h3 class="text-xl font-bold text-gray-800">道教委回答を基にした解説</h3>
+                <p class="text-lg text-gray-600 mt-1">個人情報や著作権など、特に注意すべき点について解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `},
+      { title: "生成AIでできること", content: `
+        <div class="p-8 md:p-12">
+          <p class="text-xl text-gray-600 mb-8">本日のメインパートです。デモンストレーションを交えながら、具体的な活用例を見ていきましょう。</p>
+          <h3 class="text-2xl font-bold text-center mb-6 gradient-text">主な活用領域</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+              <h4 class="text-xl font-bold text-blue-600">探索・選別・構造化</h4>
+            </div>
+            <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+              <h4 class="text-xl font-bold text-green-600">制作</h4>
+            </div>
+            <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+              <h4 class="text-xl font-bold text-purple-600">共有・運用</h4>
+            </div>
+          </div>
+        </div>
+      `},
+      { subtitle: "a) 探索・選別・構造化", content: `
+        <div class="p-8 md:p-12">
+          <p class="text-xl text-gray-600 mb-8">膨大な情報の中から、必要な情報を見つけ出し、整理・構造化する</p>
+          <div class="space-y-4">
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+              <h3 class="text-lg font-bold text-blue-800">デモ1：Deep Research</h3>
+              <p class="text-lg text-blue-700 mt-2">複雑なテーマについて、AIが自動で深くリサーチし、レポートを作成する様子をご紹介します。</p>
+            </div>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+              <h3 class="text-lg font-bold text-blue-800">デモ2：NotebookLM</h3>
+              <p class="text-lg text-blue-700 mt-2">資料から音声要約、マインドマップ、レポート、学習ガイド、フラッシュカードなどを自動生成します。</p>
+            </div>
+          </div>
+        </div>
+      `},
+      { subtitle: "b) 制作", content: `
+        <div class="p-8 md:p-12">
+          <p class="text-xl text-gray-600 mb-6">文章、画像、教材、アプリなど、様々なコンテンツを創り出す</p>
+          <div class="space-y-4">
+            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ1：nano banana</span><br>簡単な指示で画像を生成・編集します。</div>
+            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ2：Google Storybook</span><br>AIと対話しながらオリジナルの絵本を作成します。</div>
+          </div>
+        </div>
+      `},
+      { subtitle: "b) 制作（続き）", content: `
+        <div class="p-8 md:p-12">
+          <div class="space-y-4 text-lg">
+            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ3：類似テキスト・類題の作成</span><br>既存の文章や問題から、似た形式のものを複数作成します。</div>
+            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ4：Google AI検索</span><br>校外学習や旅行などの行程を対話形式で作成します。</div>
+          </div>
+        </div>
+      `},
+      { subtitle: "b) 制作（続き）：ノーコードで開発するアプリ・シミュレーション", content: `
+        <div class="p-8 md:p-12">
+          <p class="text-lg text-gray-600 mb-6">プログラミング不要で、教育用ツールを開発できます</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-xl text-indigo-600 mb-2">(1) 個別最適な学習の支援</h4>
+              <ul class="list-disc list-inside space-y-1 text-gray-700">
+                <li>英単語学習アプリ</li>
+                <li>地図パズル</li>
+                <li>平方完成ゲーム</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-xl text-rose-600 mb-2">(2) 協働的な学習の支援</h4>
+              <ul class="list-disc list-inside space-y-1 text-gray-700">
+                <li>音楽カードアプリ</li>
+                <li>レールトラックシミュレーター</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `},
+      { subtitle: "b) 制作（続き）：ノーコードで開発するアプリ・シミュレーション", content: `
+        <div class="p-8 md:p-12">
+          <div>
+            <h4 class="font-bold text-xl text-teal-600 mb-2">(3) 内容理解の支援</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700 text-lg">
+              <li>A/D変換シミュレーション</li>
+              <li>ヤングの実験シミュレーション</li>
+            </ul>
+          </div>
+        </div>
+      `},
+      { subtitle: "c) 共有・運用", content: `
+        <div class="p-8 md:p-12">
+          <p class="text-xl text-gray-600 mb-8">情報の配信や管理を自動化・効率化する</p>
+          <div class="space-y-6">
+            <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+              <h3 class="text-lg font-bold text-purple-800">デモ1：自分専用メルマガの受信</h3>
+              <p class="text-lg text-purple-700 mt-2">興味のある分野の最新情報を、AIがまとめて毎日届けてくれます。</p>
+            </div>
+            <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+              <h3 class="text-lg font-bold text-purple-800">デモ2：課題の自動配信</h3>
+              <p class="text-lg text-purple-700 mt-2">設定したルールに基づき、学習者に課題を自動で配信・管理します。</p>
+            </div>
+          </div>
+        </div>
+      `},
+      { section: "4.", title: "まとめ", content: `
+        <div class="p-8 md:p-12 space-y-6">
+          <div class="card p-6 rounded-xl">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">本日のポイント</h3>
+            <ul class="list-disc list-inside space-y-2 text-lg">
+              <li>生成AIは<span class="font-bold text-blue-600">「探索」</span><span class="font-bold text-green-600">「制作」</span><span class="font-bold text-purple-600">「運用」</span>など、多様な領域で活用できます。</li>
+              <li>デモでご紹介したように、専門知識がなくても直感的に使えるツールが多数あります。</li>
+            </ul>
+          </div>
+          <div class="card p-6 rounded-xl">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">達成目標の確認</h3>
+            <ol class="list-decimal list-inside space-y-2 text-lg">
+              <li>生成AIでできる代表的なことの全体像を知ることができましたか？</li>
+              <li>ご自身の業務・授業に即した「まず試す」ユースケースを1つ以上メモできましたか？</li>
+            </ol>
+          </div>
+        </div>
+      `},
+      { title: "さあ、次はあなたの番です", content: `
+        <div class="p-8 md:p-12 text-center flex flex-col items-center justify-center h-full">
+          <h2 class="text-4xl font-black gradient-text">「まず試す」ユースケースを考えてみましょう</h2>
+          <div class="text-xl mt-8 space-y-3 text-gray-700">
+            <p>本日のデモで興味を持ったものはありましたか？</p>
+            <p>ご自身の業務や授業で「これなら試せそう」と思ったことは何ですか？</p>
+          </div>
+          <p class="mt-10 bg-yellow-100 text-yellow-800 font-bold px-6 py-3 rounded-lg">
+            この後のアンケートで、ぜひあなたのアイディアを教えてください。
+          </p>
+        </div>
+      `},
+      { title: "お知らせとお願い", content: `
+        <div class="p-8 md:p-12 space-y-5">
+          <div class="card p-5 rounded-lg flex items-start">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <div>
+              <h3 class="font-bold text-lg">復習用コンテンツのご紹介</h3>
+              <p class="text-gray-600">本日のスライド、デモ用コンテンツ、音声解説などをGoogleサイトで共有します。チャットでURLをご確認ください。</p>
+            </div>
+          </div>
+          <div class="card p-5 rounded-lg flex items-start">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="text-green-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+            <div>
+              <h3 class="font-bold text-lg">研修第2回の予告</h3>
+              <p class="text-gray-600"><span class="font-semibold">日時：</span>11月5日(水)<br><span class="font-semibold">内容：</span>「ノーコードで作るアプリ&シミュレーション」 - アプリ開発の具体的な手順やコツを学ぶワークショップです。</p>
+            </div>
+          </div>
+          <div class="card p-5 rounded-lg flex items-start">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="text-yellow-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            <div>
+              <h3 class="font-bold text-lg">事後アンケートご協力のお願い</h3>
+              <p class="text-gray-600">研修終了後、チャットにてアンケートURLをお送りします。ご協力をお願いいたします。</p>
+            </div>
+          </div>
+        </div>
+      `}
+    ];
+
+    const container = document.getElementById('presentation-container');
+    let currentSlide = 0;
+
+    function createSlide(slideData, index) {
+      const slideEl = document.createElement('div');
+      slideEl.className = `slide w-full h-full flex-shrink-0 flex-col p-6 sm:p-8 ${index === 0 ? 'active' : ''}`;
+      slideEl.style.backgroundColor = slideData.content.includes('gradient-bg')
+        ? 'transparent'
+        : (document.documentElement.classList.contains('dark') ? '#0a0a0a' : '#f8fafc');
+
+      if (slideData.content.includes('gradient-bg')) {
+        slideEl.innerHTML = slideData.content;
+      } else {
+        let headerHTML = '';
+        if (slideData.title) {
+          headerHTML += `<h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-neutral-100 pb-4 border-b-4 border-blue-300 mb-6"><span class="title-highlight">${slideData.title}</span></h2>`;
+        }
+        if (slideData.section) {
+          headerHTML = `
+            <div class="flex items-baseline mb-6 pb-4 border-b-4 border-blue-300">
+              <span class="text-4xl md:text-5xl font-black gradient-text mr-4">${slideData.section}</span>
+              <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-neutral-100"><span class="title-highlight">${slideData.title}</span></h2>
+            </div>
+          `;
+        }
+        if (slideData.subtitle) {
+          headerHTML = `
+            <div class="mb-6 pb-4 border-b-2 border-gray-200 dark:border-white/10">
+              <h2 class="text-xl md:text-2xl font-bold text-gray-700 dark:text-neutral-200">${slideData.subtitle}</h2>
+            </div>
+          `;
+        }
+        slideEl.innerHTML = `
+          ${headerHTML}
+          <div class="flex-grow text-gray-800 dark:text-neutral-100">
+            ${slideData.content}
+          </div>
+        `;
+      }
+      return slideEl;
+    }
+
+    const slideElements = slidesData.map(createSlide);
+    slideElements.forEach(el => container.appendChild(el));
+
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const slideCounter = document.getElementById('slide-counter');
+
+    function updateSlideView() {
+      slideElements.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      slideCounter.textContent = `スライド ${currentSlide + 1} / ${slidesData.length}`;
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slidesData.length - 1;
+      prevBtn.classList.toggle('opacity-40', prevBtn.disabled);
+      nextBtn.classList.toggle('opacity-40', nextBtn.disabled);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlideView();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < slidesData.length - 1) {
+        currentSlide++;
+        updateSlideView();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextBtn.click();
+      else if (e.key === 'ArrowLeft') prevBtn.click();
+    });
+
+    updateSlideView();
+  </script>
+</body>
+</html>
