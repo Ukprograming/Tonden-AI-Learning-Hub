@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>課題の自動配信 デモ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans", "sans-serif"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          boxShadow: { soft: "0 10px 30px -10px rgba(0,0,0,0.15)" }
+        },
+      },
+    };
+  </script>
+  <style>
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); }
+    .dark .glass { background: rgba(16,28,34,0.6); }
+    .caption { font-size: 0.9rem; opacity: .75; }
+    .img-frame { background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)); }
+    .dark .img-frame { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    .lead { font-size: 1.05rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .badge { border: 1px solid rgba(0,0,0,.08); }
+    .dark .badge { border: 1px solid rgba(255,255,255,.12); }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 共通ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 本文 -->
+  <main class="pt-16">
+    <section class="relative">
+      <div class="max-w-5xl mx-auto px-4 md:px-8 py-10 md:py-16">
+        <!-- Hero -->
+        <div class="text-center space-y-4 mb-10 md:mb-14">
+          <h1 class="text-3xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white font-display">
+            課題の自動配信 デモ
+          </h1>
+          <p class="lead text-neutral-700 dark:text-neutral-300 max-w-3xl mx-auto">
+            毎朝の定時配信・自動採点・<strong>正答率に応じたレベル調整</strong>まで、AIワークフローで半自動化。  
+            回答は <strong>Googleスプレッドシート</strong>に集計し、解説も自動添付できます。
+          </p>
+          <div class="flex items-center justify-center gap-2">
+            <span class="badge px-3 py-1 rounded-full text-xs bg-white/60 dark:bg-white/10">AIエージェント</span>
+            <span class="badge px-3 py-1 rounded-full text-xs bg-white/60 dark:bg-white/10">自動化</span>
+            <span class="badge px-3 py-1 rounded-full text-xs bg-white/60 dark:bg-white/10">適応学習</span>
+          </div>
+        </div>
+
+        <!-- 概要カード -->
+        <div class="grid gap-4 md:gap-6 md:grid-cols-3 mb-12">
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">schedule_send</span>
+              <div>
+                <h3 class="font-bold">定時配信</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  問題を毎朝○時に自動送信。休校日や長期休暇も制御可能。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">assignment_turned_in</span>
+              <div>
+                <h3 class="font-bold">自動採点・解説</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  選択式は自動採点、記述式もAI補助。解説・復習リンクを自動生成。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">trending_up</span>
+              <div>
+                <h3 class="font-bold">レベル調整</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  正答率・解答時間に応じて難易度を自動調整し、最適化。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ステップ1：配信チャネル -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">1</span>
+            <h2 class="text-xl md:text-2xl font-bold">配信チャネルを選ぶ（Forms / Classroom / メール等）</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            Googleフォーム＋スプレッドシート、Google Classroom、LMS、またはメール配信など、学校環境にあわせて選択できます。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/auto-1.png" alt="配信チャネル構成のイメージ" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像1：配信チャネル例（差し替え可）</figcaption>
+        </section>
+
+        <!-- ステップ2：問題生成＆テンプレ -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">2</span>
+            <h2 class="text-xl md:text-2xl font-bold">AIで問題を自動生成し、解説も用意</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            目標コンテンツ（語彙・計算・長文・考察など）をAIに渡し、<strong>出題・模範解答・解説</strong>をテンプレに沿って生成します。
+          </p>
+          <div class="glass rounded-xl p-4 border border-black/5 dark:border-white/10">
+            <h3 class="font-semibold mb-2 text-sm">初期プロンプト例（コピペOK）</h3>
+            <pre class="p-3 bg-black/5 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>「一次方程式の文章題（中1）」の小問を毎日3問生成。
+形式：Q（問題文）/ Choices（最大4つ）/ Answer / Explanation（誤答のよくある考え方を1つ含む）/ Difficulty（★1-5）
+制約：数値は毎回変える。用語は教科書準拠。冗長な背景は省く。</code></pre>
+          </div>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft mt-4">
+            <img src="./assets/images/auto-2.png" alt="問題テンプレートのイメージ" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像2：問題テンプレ（差し替え可）</figcaption>
+        </section>
+
+        <!-- ステップ3：定時配信と収集 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">3</span>
+            <h2 class="text-xl md:text-2xl font-bold">定時配信 → 回答収集 → スプレッドシート集計</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            スケジューラで配信を自動化し、回答はスプレッドシートへ自動蓄積。<strong>採点・解説返信</strong>も自動化できます。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/auto-3.png" alt="自動配信と集計のワークフロー" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像3：自動配信→集計の流れ（差し替え可）</figcaption>
+
+          <div class="mt-4 grid md:grid-cols-3 gap-4">
+            <div class="glass rounded-xl p-4 border border-black/5 dark:border-white/10">
+              <h3 class="font-semibold mb-2 text-sm">スプレッドシート列例</h3>
+              <ul class="list-disc list-inside text-sm space-y-1">
+                <li>timestamp / student_id / class</li>
+                <li>q1_answer / q1_correct / q1_time</li>
+                <li>score_total / level_next</li>
+              </ul>
+            </div>
+            <div class="glass rounded-xl p-4 border border-black/5 dark:border-white/10">
+              <h3 class="font-semibold mb-2 text-sm">採点ロジック例</h3>
+              <ul class="list-disc list-inside text-sm space-y-1">
+                <li>選択式：一致=1点</li>
+                <li>記述式：正規化→類似度閾値</li>
+                <li>誤答タイプを分類し解説テンプレ差し込み</li>
+              </ul>
+            </div>
+            <div class="glass rounded-xl p-4 border border-black/5 dark:border-white/10">
+              <h3 class="font-semibold mb-2 text-sm">レベル調整例</h3>
+              <ul class="list-disc list-inside text-sm space-y-1">
+                <li>正答率≧80% → 難度+1 / 出題数+0</li>
+                <li>50–79% → 難度±0 / 出題数+1（復習）</li>
+                <li>＜50% → 難度-1 / ヒント付与</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ステップ4：フィードバック＆復習 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">4</span>
+            <h2 class="text-xl md:text-2xl font-bold">個別フィードバックと復習リンクを自動返信</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            生徒の誤答傾向に応じて、<strong>よくある誤りの会話例</strong>や、次に取り組むとよい練習問題へのリンクを自動で提示します。
+          </p>
+          <div class="glass rounded-xl p-4 border border-black/5 dark:border-white/10">
+            <h3 class="font-semibold mb-2 text-sm">返信テンプレ（Markdown）</h3>
+            <pre class="p-3 bg-black/5 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>## 今日のふり返り（{日付}）
+- 総合：{score_total}点 / 正答率 {accuracy}%
+- よくある誤り：{misconception_summary}
+- 会話例：{misconception_dialogue_snippet}
+- 次にやると良い：{next_exercises}（リンク）</code></pre>
+          </div>
+        </section>
+
+        <!-- 注意点 -->
+        <section class="glass rounded-xl p-6 md:p-8 shadow-soft border border-black/5 dark:border-white/10 mb-12">
+          <h3 class="text-lg md:text-xl font-bold mb-4">運用上の注意（大事）</h3>
+          <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
+            <li><strong>評価の公平性</strong>：AI採点は補助。最終判断は教員が確認。</li>
+            <li><strong>データ保護</strong>：生徒IDの扱い・共有範囲・保存期間を明確化。</li>
+            <li><strong>著作権</strong>：引用問題は出典明記。配布条件を遵守。</li>
+          </ul>
+        </section>
+
+        <!-- Back / 備考 -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <a href="./demo.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900 text-white hover:opacity-90 dark:bg-white dark:text-neutral-900 transition">
+            <span class="material-symbols-outlined">arrow_back</span>
+            デモ一覧へ戻る
+          </a>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            画像は <code>/assets/images/auto-1.png</code> / <code>auto-2.png</code> / <code>auto-3.png</code> を差し替えてください。
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
