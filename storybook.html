@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Storybook デモ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans", "sans-serif"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          boxShadow: { soft: "0 10px 30px -10px rgba(0,0,0,0.15)" }
+        },
+      },
+    };
+  </script>
+  <style>
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); }
+    .dark .glass { background: rgba(16,28,34,0.6); }
+    .caption { font-size: 0.9rem; opacity: .75; }
+    .img-frame { background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)); }
+    .dark .img-frame { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    .lead { font-size: 1.05rem; }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 共通ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 本文 -->
+  <main class="pt-16">
+    <section class="relative">
+      <div class="max-w-5xl mx-auto px-4 md:px-8 py-10 md:py-16">
+        <!-- Hero -->
+        <div class="text-center space-y-4 mb-10 md:mb-14">
+          <h1 class="text-3xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white font-display">
+            Gemini Storybook デモ
+          </h1>
+          <p class="lead text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+            <strong>Gemini の Storybook</strong> は、簡単な指示や写真をもとに、
+            <strong>AIが自動でイラスト付きの絵本</strong>を生成してくれる革新的な機能です。
+            登場人物の設定から場面ごとのイラストまで、チャットでやりとりしながら完成させられます。
+          </p>
+        </div>
+
+        <!-- Feature cards -->
+        <div class="grid gap-4 md:gap-6 md:grid-cols-3 mb-12">
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">auto_stories</span>
+              <div>
+                <h3 class="font-bold">自動で絵本生成</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  指示を送るだけで、ストーリーと挿絵がセットで生成されます。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">image</span>
+              <div>
+                <h3 class="font-bold">写真や絵を活用</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  スマホ写真やお子さんの絵をアップして、登場人物や背景として利用可能。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">chat</span>
+              <div>
+                <h3 class="font-bold">チャットで編集</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  登場人物や場面転換、オチの変更なども会話で調整できます。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 1: メニューから Storybook -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">1</span>
+            <h2 class="text-xl md:text-2xl font-bold">Gemini 左メニューから「Storybook」を選択</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            Gemini のホーム画面左のメニューにある <strong>「Storybook」</strong> をクリックすると、絵本作成が始められます。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <!-- 差し替えやすいようにプレースホルダパス -->
+            <img src="./assets/images/storybook-1.png" alt="Gemini のメニューから Storybook を選ぶ画面" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像1：Gemini のメニューにある「Storybook」</figcaption>
+        </section>
+
+        <!-- Step 2: 要望を入力して生成 / サンプルURL -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">2</span>
+            <h2 class="text-xl md:text-2xl font-bold">盛り込みたい内容を入力 → 自動で絵本を生成</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            物語に入れたい要素（登場人物・舞台・雰囲気・対象年齢など）をチャットで入力すると、
+            AI が構成を考え、<strong>登場人物や設定を自動で作成</strong>しつつ、ページごとのイラスト付き絵本を作ってくれます。
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+            <a href="https://g.co/gemini/share/ca45a9e889e4" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-primary text-white font-semibold shadow-soft hover:opacity-95 transition">
+              <span class="material-symbols-outlined">auto_stories</span>
+              サンプル Storybook を開く
+            </a>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              ※ 上記ボタンから、実際に生成された Storybook の例をブラウザでご覧いただけます。
+            </p>
+          </div>
+        </section>
+
+        <!-- Step 3: 写真やファイルを登場人物・背景に -->
+        <section class="mb-14">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">3</span>
+            <h2 class="text-xl md:text-2xl font-bold">写真やファイルを活用：登場人物や背景に反映</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            スマートフォンで撮影した写真や、お子さんが描いた絵をアップロードして、
+            <strong>物語の登場人物や背景</strong>として利用できます。オリジナル素材を活かした、世界に一冊の絵本が作れます。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/storybook-2.png" alt="写真や絵をアップロードして登場人物・背景に使う例" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像2：アップした素材を活かしてページが構成されるイメージ</figcaption>
+        </section>
+
+        <!-- Tips -->
+        <section class="glass rounded-xl p-6 md:p-8 shadow-soft border border-black/5 dark:border-white/10">
+          <h3 class="text-lg md:text-xl font-bold mb-3">使いこなしのコツ</h3>
+          <ul class="list-disc list-inside space-y-2 text-neutral-700 dark:text-neutral-300">
+            <li>最初の指示で「対象年齢・登場人物・舞台・雰囲気（例：優しい／冒険／学習）」をまとめて伝える</li>
+            <li>ページ数の指定（例：「全10ページで」）や、結末の方向性（ハッピーエンド等）を追加する</li>
+            <li>アップする画像には、使いたい用途（主人公／背景／小物）を一緒に記載すると反映されやすい</li>
+          </ul>
+        </section>
+
+        <!-- Back / CTA -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <a href="./demo.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900 text-white hover:opacity-90 dark:bg-white dark:text-neutral-900 transition">
+            <span class="material-symbols-outlined">arrow_back</span>
+            デモ一覧へ戻る
+          </a>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            画像は <code>/assets/images/storybook-1.png</code> / <code>storybook-2.png</code> を差し替えてください。
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
