@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nano Banana デモ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans", "sans-serif"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          boxShadow: { soft: "0 10px 30px -10px rgba(0,0,0,0.15)" }
+        },
+      },
+    };
+  </script>
+  <style>
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); }
+    .dark .glass { background: rgba(16,28,34,0.6); }
+    .caption { font-size: 0.9rem; opacity: .75; }
+    .img-frame { background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)); }
+    .dark .img-frame { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    .lead { font-size: 1.05rem; }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 共通ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 本文 -->
+  <main class="pt-16">
+    <section class="relative">
+      <div class="max-w-5xl mx-auto px-4 md:px-8 py-10 md:py-16">
+        <!-- Hero -->
+        <div class="text-center space-y-4 mb-10 md:mb-14">
+          <h1 class="text-3xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white font-display">
+            Nano Banana デモ
+          </h1>
+          <p class="lead text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+            「<strong>Nano Banana（ナノバナナ）</strong>」は、Googleが開発した最新の
+            <strong>AI画像生成・編集ツール</strong>。Googleの画像特化AIモデル
+            <strong>Gemini 2.5 Flash Image</strong> に付けられた愛称です。高い一貫性、自然な
+            合成表現、そしてシンプルな操作性が特長です。
+          </p>
+        </div>
+
+        <!-- Key features -->
+        <div class="grid gap-4 md:gap-6 md:grid-cols-3 mb-12">
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">verified</span>
+              <div>
+                <h3 class="font-bold">驚異的な一貫性</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  キャラクターやスタイルを維持した連続生成が得意。複数カットでも同一人物・同一トーンを保ちやすい。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">layers</span>
+              <div>
+                <h3 class="font-bold">複数画像の自然合成</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  異なる画像を違和感なく合成。被写体の切り抜きや統合も高品質。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">chat</span>
+              <div>
+                <h3 class="font-bold">チャットで使える</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  Gemini または Google AI Studio で機能を有効化し、チャットに指示するだけで利用可能。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 1: 一貫性 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">1</span>
+            <h2 class="text-xl md:text-2xl font-bold">驚異的な一貫性</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            同じキャラクターやスタイルを保ったまま、複数の構図・ポーズを生成できます。教材イラストや連作にも最適です。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/nano-banana-1.png" alt="Nano Banana の一貫性の例" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像1：一貫したルックでの連続生成例</figcaption>
+        </section>
+
+        <!-- Step 2: 複数画像の合成 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">2</span>
+            <h2 class="text-xl md:text-2xl font-bold">複数画像の自然な合成</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            二枚以上の画像を読み込み、被写体の合成や背景差し替えを自然に実現。光や影、色調も馴染みやすく、高品質な合成が可能です。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/nano-banana-2.png" alt="Nano Banana の合成例" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像2：複数画像を自然に合成した例</figcaption>
+        </section>
+
+        <!-- Step 3: 使い方（Gemini/AI Studio） -->
+        <section class="mb-14">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">3</span>
+            <h2 class="text-xl md:text-2xl font-bold">Gemini / Google AI Studio でチャット利用</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            Gemini または Google AI Studio の設定で Nano Banana（Gemini 2.5 Flash Image）を有効にし、
+            チャットで「〇〇のイラストを、手描き風で」「この2枚を合成して背景は教室に」など自然文で指示するだけ。
+            画像の追加や編集指示も対話で完結します。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/nano-banana-3.png" alt="Gemini/Google AI Studioでのチャット利用画面" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像3：チャットでの画像生成・編集の指示例</figcaption>
+        </section>
+
+        <!-- Tips -->
+        <section class="glass rounded-xl p-6 md:p-8 shadow-soft border border-black/5 dark:border-white/10">
+          <h3 class="text-lg md:text-xl font-bold mb-3">プロンプトのコツ</h3>
+          <ul class="list-disc list-inside space-y-2 text-neutral-700 dark:text-neutral-300">
+            <li>「画風」「構図」「色味」「用途（教材・掲示物など）」を明確に指定する</li>
+            <li>連作の場合は <em>固定のキャラクター設定</em>（服装・髪型・小物）を毎回添える</li>
+            <li>合成では、各画像の役割（背景 / 主被写体）を先に宣言しておく</li>
+          </ul>
+        </section>
+
+        <!-- Back / CTA -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <a href="./demo.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900 text-white hover:opacity-90 dark:bg-white dark:text-neutral-900 transition">
+            <span class="material-symbols-outlined">arrow_back</span>
+            デモ一覧へ戻る
+          </a>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            画像は <code>/assets/images/nano-banana-1.png</code> / <code>nano-banana-2.png</code> / <code>nano-banana-3.png</code> を差し替えてください。
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
