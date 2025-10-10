@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deep Research デモ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style"
+        href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700"
+        onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans", "sans-serif"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          boxShadow: {
+            soft: "0 8px 30px rgba(0,0,0,0.06)"
+          }
+        },
+      },
+    };
+  </script>
+  <style>
+    .card { background: rgba(255,255,255,0.9); }
+    .dark .card { background: rgba(16,28,34,0.6); }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 固定ツールバー（共通） === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="./" class="flex items-center gap-2 group" aria-label="ホーム">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 本文 -->
+  <div class="min-h-screen pt-16">
+    <main class="flex justify-center py-10 lg:py-16">
+      <div class="w-full max-w-5xl px-4 md:px-8">
+
+        <!-- 見出し & パンくず -->
+        <nav class="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+          <a href="./demo.html" class="hover:underline">デモ用コンテンツ</a>
+          <span class="mx-2">/</span>
+          <span class="text-neutral-700 dark:text-neutral-300">Deep Research</span>
+        </nav>
+
+        <header class="mb-10 text-center">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white">Deep Research（自動リサーチ）</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300">
+            生成AIが複雑なテーマを多面的に調査し、要点を整理したレポートを作成します。ここでは手順を画像とともにサクッと紹介します。
+          </p>
+        </header>
+
+        <section class="space-y-10">
+
+          <!-- Step 1 -->
+          <article class="rounded-xl border border-neutral-200/80 dark:border-neutral-800 shadow-soft card">
+            <div class="p-6 md:p-8">
+              <h2 class="text-2xl font-bold mb-3 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">add_circle</span>
+                1. 生成AIのホームで「＋ボタン」→「Deep Research」を選択
+              </h2>
+              <p class="text-neutral-700 dark:text-neutral-300">
+                ChatGPT や Gemini のホーム画面から、新規作成（＋）メニューを開き、
+                <span class="font-semibold">Deep Research</span> を選びます。
+              </p>
+
+              <!-- 画像１（差し替えやすいようにパスを分かりやすく） -->
+              <!-- 画像を差し替える場合は下記 src を置き換えてください -->
+              <figure class="mt-6">
+                <img
+                  src="./assets/images/deep-research/step1-placeholder.png"
+                  alt="ホーム画面で＋ボタンから Deep Research を選択する様子（プレースホルダー）"
+                  class="w-full rounded-lg border border-neutral-200/70 dark:border-neutral-800 object-cover"
+                  loading="lazy"
+                />
+                <figcaption class="text-xs mt-2 text-neutral-500 dark:text-neutral-400">
+                  画像１：ホーム画面 → ＋ボタン → Deep Research
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- Step 2 -->
+          <article class="rounded-xl border border-neutral-200/80 dark:border-neutral-800 shadow-soft card">
+            <div class="p-6 md:p-8">
+              <h2 class="text-2xl font-bold mb-3 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">description</span>
+                2. 調べたい内容を入力するとレポートが生成される
+              </h2>
+              <p class="text-neutral-700 dark:text-neutral-300">
+                テーマや調べたい観点を入力して実行すると、AI が信頼ソースを横断的に収集・要約し、
+                背景、論点、比較表、参考リンクなどをまとめた <span class="font-semibold">レポート</span> が表示されます。
+              </p>
+
+              <!-- レポートURL（下のスクリプトで一括設定できます） -->
+              <div class="mt-4">
+                <a id="dr-report-url" href="#" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-1 text-primary font-medium hover:underline">
+                  レポートを開く <span class="material-symbols-outlined text-base">arrow_outward</span>
+                </a>
+                <p class="text-xs mt-1 text-neutral-500 dark:text-neutral-400">
+                  ※ レポートが未公開の場合は「準備中」と表示されます。
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Step 3 -->
+          <article class="rounded-xl border border-neutral-200/80 dark:border-neutral-800 shadow-soft card">
+            <div class="p-6 md:p-8">
+              <h2 class="text-2xl font-bold mb-3 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">draw</span>
+                3. プロンプト作成もAIにお任せ可能
+              </h2>
+              <p class="text-neutral-700 dark:text-neutral-300">
+                「どんな観点で調べれば良いか分からない…」という場合は、
+                まず生成AIに <span class="font-semibold">Deep Research 用のプロンプト</span> を作ってもらい、それをそのまま流用できます。
+                「対象・目的・観点・制約・出力形式」などを含むテンプレートをAIに作成させるのがおすすめです。
+              </p>
+
+              <!-- 画像２（差し替えやすいようにパスを分かりやすく） -->
+              <figure class="mt-6">
+                <img
+                  src="./assets/images/deep-research/step2-placeholder.png"
+                  alt="AI に Deep Research のプロンプト作成を依頼する様子（プレースホルダー）"
+                  class="w-full rounded-lg border border-neutral-200/70 dark:border-neutral-800 object-cover"
+                  loading="lazy"
+                />
+                <figcaption class="text-xs mt-2 text-neutral-500 dark:text-neutral-400">
+                  画像２：AI にプロンプト作成を依頼
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- 補足：運用のヒント -->
+          <aside class="rounded-xl border border-neutral-200/80 dark:border-neutral-800 shadow-soft p-6 md:p-8 card">
+            <h3 class="text-xl font-bold mb-2">運用のヒント</h3>
+            <ul class="list-disc list-inside space-y-1 text-neutral-700 dark:text-neutral-300">
+              <li>レポートの元ソース（引用リンク）を必ず確認し、重要部分は一次情報に当たる。</li>
+              <li>前提条件・対象範囲・除外条件を明確化すると、リサーチの精度が上がります。</li>
+              <li>比較観点（例：コスト・効果・実現性・リスク）を最初に列挙しておくと読みやすいレポートになります。</li>
+            </ul>
+          </aside>
+
+        </section>
+
+        <!-- 戻るリンク -->
+        <div class="mt-12 text-center">
+          <a href="./demo.html" class="inline-flex items-center gap-1 text-primary font-medium hover:underline">
+            デモ一覧に戻る <span class="material-symbols-outlined text-base">arrow_back</span>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- 簡易設定スクリプト：レポートURLの一括設定 & プレースホルダー対応 -->
+  <script>
+    // ▼ レポートURLをここで設定（空文字だと「準備中」表示）
+    const REPORT_URL = "";
+
+    const a = document.getElementById("dr-report-url");
+    if (REPORT_URL && /^https?:\/\//i.test(REPORT_URL)) {
+      a.href = REPORT_URL;
+      a.textContent = "レポートを開く";
+    } else {
+      a.removeAttribute("href");
+      a.classList.remove("text-primary","hover:underline");
+      a.classList.add("opacity-50","pointer-events-none");
+      a.textContent = "レポート（準備中）";
+    }
+
+    // 画像差し替えメモ：
+    // ./assets/images/deep-research/step1-placeholder.png
+    // ./assets/images/deep-research/step2-placeholder.png
+    // を任意の画像に置換してください（パスだけ差し替えでOK）。
+  </script>
+</body>
+</html>
