@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NotebookLM デモ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans", "sans-serif"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          boxShadow: {
+            soft: "0 10px 30px -10px rgba(0,0,0,0.15)",
+          }
+        },
+      },
+    };
+  </script>
+
+  <style>
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); }
+    .dark .glass { background: rgba(16,28,34,0.6); }
+    .caption { font-size: 0.9rem; opacity: .75; }
+    .img-frame {
+      background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
+    }
+    .dark .img-frame {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 共通ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 本文 -->
+  <main class="pt-16">
+    <section class="relative">
+      <div class="max-w-5xl mx-auto px-4 md:px-8 py-10 md:py-16">
+        <!-- Hero -->
+        <div class="text-center space-y-4 mb-10 md:mb-14">
+          <h1 class="text-3xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white font-display">
+            NotebookLM デモ
+          </h1>
+          <p class="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
+            NotebookLMは、Googleが開発した <strong>AI搭載の情報整理・リサーチ支援ツール</strong>。一般的なAIチャットと異なり、
+            <strong>あなたが提供した情報源（ソース）のみ</strong>を基に回答を生成します。音声解説や学習ガイド、マインドマップなどで情報を構造化し、
+            複数資料の横断分析も可能。最近は <strong>Google Classroom</strong> とも連携し、Classroom内でも使えるようになりました。
+          </p>
+        </div>
+
+        <!-- Feature bullets -->
+        <div class="grid gap-4 md:gap-6 md:grid-cols-2 mb-12">
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">library_books</span>
+              <div>
+                <h3 class="font-bold">手持ち資料に"根拠限定"で答える</h3>
+                <p class="text-sm md:text-base text-neutral-600 dark:text-neutral-300 mt-1">
+                  指定したPDFやURL、ドキュメントのみを参照。不要な幻覚を抑え、出典に沿った回答に特化。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">account_tree</span>
+              <div>
+                <h3 class="font-bold">構造化出力がワンクリック</h3>
+                <p class="text-sm md:text-base text-neutral-600 dark:text-neutral-300 mt-1">
+                  音声解説、学習ガイド、マインドマップ、要約カード等をボタン一つで生成。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">hub</span>
+              <div>
+                <h3 class="font-bold">複数資料の横断分析</h3>
+                <p class="text-sm md:text-base text-neutral-600 dark:text-neutral-300 mt-1">
+                  PDFやノート、リンクを束ねて、共通点の抽出や比較対照を自動で実施。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">class</span>
+              <div>
+                <h3 class="font-bold">Google Classroom連携</h3>
+                <p class="text-sm md:text-base text-neutral-600 dark:text-neutral-300 mt-1">
+                  Classroom内からNotebookLMを呼び出し、授業資料を基に学習ガイド等を即生成。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">1</span>
+            <h2 class="text-xl md:text-2xl font-bold">Chromeのランチャーから「NotebookLM」を起動</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            Google Chromeのランチャー（アプリ一覧）の下の方にある <strong>「NotebookLM」</strong> を選択します。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/notebooklm-1.png" alt="ChromeランチャーでNotebookLMを選ぶ画面" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像1：Chrome ランチャーから NotebookLM を選択</figcaption>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">2</span>
+            <h2 class="text-xl md:text-2xl font-bold">資料をアップロードして出力形式を選ぶだけ</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            調べたい <strong>PDFやドキュメントをアップロード</strong>。画面右側（または上部）のメニューから
+            <strong>音声解説・学習ガイド・マインドマップ</strong> など、欲しい出力をワンクリックで生成できます。
+            複数の資料を入れておくと、横断的な要約・比較も可能です。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/notebooklm-2.png" alt="資料PDFをアップロードして出力形式を選ぶ画面" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像2：資料を登録して出力（音声解説・学習ガイド・マインドマップ等）を選択</figcaption>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="mb-14">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">3</span>
+            <h2 class="text-xl md:text-2xl font-bold">チャット形式で質問もできる</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            NotebookLM内のチャットに質問を入力すると、登録した <strong>ソースに基づく根拠付き回答</strong> が返ってきます。
+            必要に応じて引用やリンクを辿って、原典を確認できます。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/notebooklm-3.png" alt="NotebookLMでチャット質問する画面" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像3：チャットで質問し、根拠（ソース）に基づく回答を得る</figcaption>
+        </section>
+
+        <!-- Tips / Prompt help -->
+        <section class="glass rounded-xl p-6 md:p-8 shadow-soft border border-black/5 dark:border-white/10">
+          <h3 class="text-lg md:text-xl font-bold mb-3">プロンプト例（分析の厚みを出す）</h3>
+          <ul class="list-disc list-inside space-y-2 text-neutral-700 dark:text-neutral-300">
+            <li>「登録した3本の論文の主張の共通点と相違点を3点ずつ、根拠の引用とともに示してください」</li>
+            <li>「PDF内の第2章を要約し、学習者向けの理解度チェック（○×問題）を5問作成してください」</li>
+            <li>「アップロードした教材から、90秒の音声解説スクリプトを作成し、重要用語のグロッサリーも付けてください」</li>
+          </ul>
+        </section>
+
+        <!-- Back / CTA -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <a href="./demo.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900 text-white hover:opacity-90 dark:bg-white dark:text-neutral-900 transition">
+            <span class="material-symbols-outlined">arrow_back</span>
+            デモ一覧へ戻る
+          </a>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            画像ファイルは <code>/assets/images/notebooklm-1.png</code> / <code>notebooklm-2.png</code> / <code>notebooklm-3.png</code> を差し替えてください。
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
