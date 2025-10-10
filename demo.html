@@ -296,13 +296,19 @@
 
   <!-- URL一括管理スクリプト -->
   <script>
+    // 各「デモを見る」ボタンの遷移先（同一リポジトリ直下に設置する想定）
     const DEMO_URLS = {
-      "deepresearch":      "",
-      "notebooklm":        "",
-      "nano-banana":       "",
-      "storybook":         "",
-      "google-ai-search":  "",
-      "similar-text":      "",
+      /* 探索・選別・構造化 */
+      "deepresearch":      "./deep-research.html",
+      "notebooklm":        "./notebooklm.html",
+
+      /* 制作 */
+      "nano-banana":       "./nano-banana.html",
+      "storybook":         "./storybook.html",
+      "google-ai-search":  "./google-ai-search.html",
+      "similar-text":      "./similar-text.html",
+
+      /* ノーコード枠（外部デモはそのまま） */
       "word-app":          "https://ukprograming.github.io/ja-en-test/",
       "map-puzzle":        "https://ukprograming.github.io/world-map-puzzle/",
       "completing-square": "https://ts9460ts-source.github.io/heiho1/",
@@ -310,9 +316,10 @@
       "rail-track-sim":    "https://ukprograming.github.io/RailTrack-Simulator/",
       "adc-sim":           "https://sites.google.com/hokkaido-c.ed.jp/digital2509?usp=sharing",
       "youngs-experiment": "https://ukprograming.github.io/Young-s-double-slit-experiment/",
-      /* 共有・運用のデモ（準備中） */
-      "ai-newsletter":     "",
-      "auto-assignment":   ""
+
+      /* 共有・運用 */
+      "ai-newsletter":     "./ai-newsletter.html",
+      "auto-assignment":   "./auto-assignment.html"
     };
 
     // すべての「デモを見る」を新しいタブで開く（URL未設定は準備中表示）
