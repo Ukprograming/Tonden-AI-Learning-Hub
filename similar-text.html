@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>類似テキスト・類題の作成 デモ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans", "sans-serif"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          boxShadow: { soft: "0 10px 30px -10px rgba(0,0,0,0.15)" }
+        },
+      },
+    };
+  </script>
+  <style>
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); }
+    .dark .glass { background: rgba(16,28,34,0.6); }
+    .caption { font-size: 0.9rem; opacity: .75; }
+    .img-frame { background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)); }
+    .dark .img-frame { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    .lead { font-size: 1.05rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 共通ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 本文 -->
+  <main class="pt-16">
+    <section class="relative">
+      <div class="max-w-5xl mx-auto px-4 md:px-8 py-10 md:py-16">
+        <!-- Hero -->
+        <div class="text-center space-y-4 mb-10 md:mb-14">
+          <h1 class="text-3xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white font-display">
+            類似テキスト・類題の作成 デモ
+          </h1>
+          <p class="lead text-neutral-700 dark:text-neutral-300 max-w-3xl mx-auto">
+            生成AIに <strong>PDFや問題文</strong> を読み込ませて、
+            <strong>計算／考察／長文読解</strong> など多様な <strong>類題</strong> を作成できます。
+            難易度・出題形式の調整はもちろん、<strong>よくある誤答の会話文</strong> まで自動生成して
+            反駁（リフレクション）素材として活用可能です。
+          </p>
+        </div>
+
+        <!-- Overview cards -->
+        <div class="grid gap-4 md:gap-6 md:grid-cols-3 mb-12">
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">description</span>
+              <div>
+                <h3 class="font-bold">資料を読み込んで生成</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  PDFや過去問題を根拠に、同レベル〜段階的な類題を作成。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">psychology_alt</span>
+              <div>
+                <h3 class="font-bold">誤答の会話化</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  「ありがちな誤解」を対話にして、生徒に反駁させる教材に。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">tune</span>
+              <div>
+                <h3 class="font-bold">難易度・形式を自在に</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  設定・数値・形式を変えて、多角的に理解度を確認。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 1: PDFを読み込ませる -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">1</span>
+            <h2 class="text-xl md:text-2xl font-bold">PDFや問題文をアップロード</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            生成AI（ChatGPTやGemini 等）に元問題（PDF/画像/テキスト）を読み込ませます。
+            以降の生成は<strong>この情報を根拠に</strong>行われるため、出典を限定した運用が可能です。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/similar-1.png" alt="PDFアップロードのイメージ" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像1：PDFアップロードのイメージ（差し替え可）</figcaption>
+        </section>
+
+        <!-- Step 2: 類題の自動生成 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">2</span>
+            <h2 class="text-xl md:text-2xl font-bold">計算／考察／長文… 多様な類題を生成</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            数値差し替え、登場人物や場面設定の変更、設問形式の変換（選択式⇄記述式 など）も簡単。
+            <strong>生徒のつまずきに合わせて</strong> 問題の角度を微調整できます。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/similar-2.png" alt="類題生成のイメージ" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像2：類題生成のイメージ（差し替え可）</figcaption>
+        </section>
+
+        <!-- Step 3: よくある誤答→反駁教材 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">3</span>
+            <h2 class="text-xl md:text-2xl font-bold">「よくある間違った解法」を会話化して反駁</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            典型的な誤答の筋道を <strong>会話文（生徒A/生徒B など）</strong> にし、
+            どこが誤りかを指摘・修正するタスクにすれば、誤概念の矯正に効果的です。
+          </p>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/similar-3.png" alt="誤答の会話化のイメージ" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像3：誤答の会話化のイメージ（差し替え可）</figcaption>
+        </section>
+
+        <!-- プロンプト例：設定・難易度・形式の工夫 -->
+        <section class="glass rounded-xl p-6 md:p-8 shadow-soft border border-black/5 dark:border-white/10 mb-12">
+          <h3 class="text-lg md:text-xl font-bold mb-4">効果的なプロンプトの作り方（コピペOK）</h3>
+
+          <div class="space-y-6">
+            <!-- 設定を変える -->
+            <div>
+              <h4 class="font-semibold mb-2">① 設定を変える（数値・登場人物・場面）</h4>
+              <pre class="p-4 bg-black/5 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>次のPDFの問題と同じ出題意図を保ちつつ、<strong>数値と状況設定</strong>を変更した類題を3問作成してください。
+・難易度は元問題と同等
+・与式や単位は現実的な値に
+・最後に模範解答と途中式を付ける
+【資料】&lt;アップロードしたPDF&gt;</code></pre>
+            </div>
+
+            <!-- 難易度調整 -->
+            <div>
+              <h4 class="font-semibold mb-2">② 難易度を調整する</h4>
+              <pre class="p-4 bg-black/5 dark:bg:white/10 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>同じ概念を扱う問題を、<strong>基礎・標準・発展</strong>の3段階で各2問ずつ作成してください。
+・基礎：単一概念、計算は1〜2ステップ
+・標準：2つ以上の概念を組み合わせ
+・発展：条件を増やし、方針選択を伴う
+各問に模範解答と、つまずきやすいポイントの解説を付与</code></pre>
+            </div>
+
+            <!-- 形式変更 -->
+            <div>
+              <h4 class="font-semibold mb-2">③ 形式を変更する（選択式 ⇄ 記述式 など）</h4>
+              <pre class="p-4 bg-black/5 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>次の問題と<strong>同じ学習目標</strong>を達成できるように、形式を [記述式/選択式/穴埋め/真偽] に変えた類題を2問作成してください。
+また、<strong>評価観点（観点別配点例）</strong>も添えてください。
+【元問題】&lt;問題文&gt;</code></pre>
+            </div>
+
+            <!-- 誤答の会話化 -->
+            <div>
+              <h4 class="font-semibold mb-2">④ よくある誤答を会話化 → 反駁タスクに</h4>
+              <pre class="p-4 bg-black/5 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>この単元で<strong>よくある誤解</strong>を2種類挙げ、それぞれについて
+(1) 誤った解法の会話例（生徒A/生徒B）
+(2) 誤りの根拠と正しい考え方（教師の解説）
+(3) 生徒が反駁するためのヒント（足場かけ）
+を作成してください。評価ルーブリック案も提示。</code></pre>
+            </div>
+
+            <!-- 付随アウトプット -->
+            <div>
+              <h4 class="font-semibold mb-2">⑤ 解法の手順・誤答分析・要点整理なども</h4>
+              <pre class="p-4 bg-black/5 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>以下の出力をまとめて生成してください。
+A. 解法のステップ・バイ・ステップ解説（図示の指示文付き）
+B. 典型的な誤答パターンと発生理由
+C. 関連知識の体系図（章・節レベル）
+D. 授業配布用の要点整理（A4 1枚）</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 具体例（サンプル） -->
+        <section class="mb-14">
+          <h3 class="text-lg md:text-xl font-bold mb-4">具体例（サンプル）</h3>
+          <div class="grid gap-6 md:grid-cols-2">
+            <!-- 数学サンプル -->
+            <div class="rounded-xl border border-black/5 dark:border-white/10 p-5">
+              <h4 class="font-semibold mb-2">数学：一次関数（標準 → 形式変更）</h4>
+              <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-3">
+                「直線の式の決定」を、<strong>図から読み取る選択式</strong>と、
+                <strong>文章から式を立てる記述式</strong>の2パターンで作問。
+              </p>
+              <ul class="list-disc list-inside text-sm space-y-1">
+                <li>基礎2問・標準2問・発展2問</li>
+                <li>各問に配点と観点別評価例</li>
+                <li>誤答対話（傾きの解釈ミス）付き</li>
+              </ul>
+            </div>
+            <!-- 国語サンプル -->
+            <div class="rounded-xl border border-black/5 dark:border-white/10 p-5">
+              <h4 class="font-semibold mb-2">国語：要約・論の展開（難易度調整）</h4>
+              <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-3">
+                同じ素材文から、<strong>要約→立場の違いで反論</strong>→
+                <strong>言い換えで論旨を補強</strong> の三段階に。
+              </p>
+              <ul class="list-disc list-inside text-sm space-y-1">
+                <li>語彙制限・語数制限で難度調整</li>
+                <li>誤答の会話化（論点ずらし）</li>
+                <li>要点整理のプリント（A4）</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Back / CTA -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <a href="./demo.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900 text-white hover:opacity-90 dark:bg-white dark:text-neutral-900 transition">
+            <span class="material-symbols-outlined">arrow_back</span>
+            デモ一覧へ戻る
+          </a>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            画像は <code>/assets/images/similar-1.png</code> / <code>similar-2.png</code> / <code>similar-3.png</code> を差し替えてください。
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
