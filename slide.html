@@ -3,22 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tonden AI Learning Hub</title>
+  <title>研修スライド | Tonden AI Learning Hub</title>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
-    rel="stylesheet"
-  />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
   <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
-  <!-- Tailwind Play CDN -->
+  <!-- Tailwind（外側のレイアウト用。警告は無害です） -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script>
     tailwind.config = {
@@ -32,492 +27,1244 @@
           },
           fontFamily: {
             display: ["Space Grotesk", "Noto Sans JP", "sans-serif"],
-            body: ["Inter", "Noto Sans JP", "sans-serif"],
+            sans: ["Noto Sans JP", "sans-serif"],
           },
-          borderRadius: {
-            DEFAULT: "0.25rem",
-            lg: "0.5rem",
-            xl: "0.75rem",
-            full: "9999px",
-          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
         },
       },
     };
   </script>
 
   <style>
-    /* 既存 */
-    .slide-container .navigation { display: none; }
-
-    /* Base font smoothing */
-    body {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+    .slide-frame-wrap{
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0001;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,.06);
     }
-    /* Slide visibility */
-    .slide { display: none; }
-    .slide.active { display: flex; }
-
-    /* Visual accents */
-    .gradient-bg {
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    }
-    .gradient-text {
-      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
-    }
-    .title-highlight { position: relative; display: inline-block; }
-    .title-highlight::after {
-      content: '';
-      position: absolute; bottom: 5px; left: 0;
-      width: 100%; height: 12px; background: #60a5fa; opacity: 0.3;
-      z-index: -1; transform: skew(-15deg);
-    }
-    .card {
-      background-color: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .icon-bg { background-color: #e0f2fe; }
+    .slide-frame{ width: 100%; height: 100%; border: 0; background: #fff; }
   </style>
 </head>
 
-<body class="font-body">
-  <!-- === ツールバー / ナビゲーション（固定表示） === -->
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 固定ツールバー === -->
   <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
     <div class="max-w-7xl mx-auto px-4 md:px-8">
-      <div class="h-14 flex items-center justify-between">
-        <!-- サイトタイトル -->
+      <div class="h-16 flex items-center justify-between">
         <a href="./" class="flex items-center gap-2 group">
           <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
             Tonden <span class="text-primary">AI</span> Learning Hub
           </span>
         </a>
-        <!-- ナビボタン -->
         <nav class="flex items-center gap-2">
-          <!-- 必要に応じて href を差し替えてください -->
-          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
-            ホーム
-          </a>
-          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
-            研修スライド
-          </a>
-          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
-            デモ用コンテンツ
-          </a>
-          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">
-            復習用コンテンツ
-          </a>
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" aria-current="page" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary hover:bg-primary/15 dark:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- コンテンツ全体に上余白（固定ヘッダーの分）を追加 -->
-  <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden pt-16">
-    <div class="layout-container flex h-full grow flex-col">
-      <main class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-10 md:py-16">
-        <div class="layout-content-container flex flex-col w-full max-w-5xl">
-          <div class="flex flex-col items-center text-center gap-4 mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-black dark:text-white font-display">研修スライド</h1>
-            <p class="text-lg text-black/60 dark:text-white/60 max-w-3xl">
-              AI研修プログラムのスライドです。AIについて、誰にとっても身近で魅力的なものになるようデザインされています。
-            </p>
+  <!-- 固定ヘッダー分の余白 -->
+  <div class="min-h-screen pt-16">
+    <main class="flex justify-center py-10 lg:py-16">
+      <div class="w-full max-w-6xl px-4 md:px-8 space-y-12">
+
+        <!-- ページ見出し -->
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white">研修スライド</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300">
+            2種類のスライド（Gemini / Genspark）を大きく表示します。各枠内でキーボード（←/→）やボタンで進行できます。
+          </p>
+        </div>
+
+        <!-- スライド①（Gemini） -->
+        <section class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl">slideshow</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white">スライド資料①（Gemini）</h2>
           </div>
+          <div class="slide-frame-wrap">
+            <iframe id="geminiFrame" class="slide-frame" loading="lazy" title="Gemini Slides"></iframe>
+          </div>
+        </section>
 
-          <div class="flex flex-col gap-8">
-            <!-- スライド表示部分 -->
-            <div class="w-full aspect-video bg-black/5 dark:bg-white/5 rounded-lg shadow-sm overflow-hidden slide-container">
-              <div id="presentation-container" class="w-full h-full bg-white dark:bg-neutral-900"></div>
-            </div>
+        <!-- スライド②（Genspark） -->
+        <section class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl">slideshow</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white">スライド資料②（Genspark）</h2>
+          </div>
+          <div class="slide-frame-wrap">
+            <iframe id="gensparkFrame" class="slide-frame" loading="lazy" title="Genspark Slides"></iframe>
+          </div>
+        </section>
 
-            <!-- ナビ -->
-            <div class="w-full flex justify-between items-center px-4">
-              <button id="prev-btn" class="flex items-center gap-2 text-black/60 dark:text-white/60 hover:text-primary dark:hover:text-primary transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                <span>前へ</span>
-              </button>
+        <!-- 音声解説 -->
+        <section class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl">mic</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white">音声解説</h2>
+          </div>
+          <div class="rounded-xl border border-neutral-200/80 bg-white dark:border-neutral-800 dark:bg-neutral-900/50 shadow-sm p-6">
+            <p class="text-neutral-700 dark:text-neutral-300 mb-3">
+              スライドに対応した音声解説です。ファイルパスを実データに差し替えてください。
+            </p>
+            <audio class="w-full" controls preload="metadata">
+              <!-- ここを実ファイルに置き換えてください -->
+              <!-- 例：<source src="./audio/slide-commentary.mp3" type="audio/mpeg"> -->
+              <source src="./assets/audio/review.m4a?v=1" type="audio/mp4">
+              お使いのブラウザは音声再生に対応していません。
+            </audio>
+          </div>
+        </section>
 
-              <p id="slide-counter" class="text-sm text-black/60 dark:text-white/60">スライド 1 / 15</p>
+        <!-- フッターノート -->
+        <p class="text-center text-xs text-neutral-500 dark:text-neutral-400">
+          © Tonden AI Learning Hub
+        </p>
+      </div>
+    </main>
+  </div>
 
-              <button id="next-btn" class="flex items-center gap-2 text-black/60 dark:text-white/60 hover:text-primary dark:hover:text-primary transition-colors">
-                <span>次へ</span>
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-              </button>
-            </div>
+  <!-- ========== 埋め込み用テンプレート（①/②をそのまま格納） ========== -->
+  <!-- ① Gemini -->
+  <template id="tpl-gemini">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AI研修スライド</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+        .slide-container {
+            width: 90%;
+            max-width: 1024px;
+            aspect-ratio: 16 / 9;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 20px auto;
+            background:#fff;
+        }
+        .slide {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #f8fafc;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 4%;
+        }
+        .slide.active { opacity: 1; z-index: 1; }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white; border: none; border-radius: 50%;
+            width: 44px; height: 44px; font-size: 24px; cursor: pointer;
+            z-index: 10; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .nav-button:hover { background-color: rgba(0, 0, 0, 0.6); }
+        .nav-button:disabled { opacity: 0.3; cursor: not-allowed; }
+        #prev-btn { left: 10px; }
+        #next-btn { right: 10px; }
+        #slide-counter {
+            position: absolute; bottom: 10px; left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5); color: white;
+            padding: 6px 12px; border-radius: 20px; font-size: 12px; z-index: 10;
+        }
+        .gradient-bg { background: linear-gradient(135deg, #e0f2fe, #fce7f3); }
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .card { background-color: white; border: 1px solid #e5e7eb; }
+        .slide-header { padding-bottom: 1rem; border-bottom: 3px solid #60a5fa; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="slide-container" id="presentation-container"></div>
+    <button id="prev-btn" class="nav-button" aria-label="前へ">&lt;</button>
+    <button id="next-btn" class="nav-button" aria-label="次へ">&gt;</button>
+    <div id="slide-counter" aria-live="polite"></div>
 
-            <!-- 音声解説 -->
-            <div class="flex flex-col gap-4">
-              <h2 class="text-2xl font-bold tracking-tight text-black dark:text-white font-display text-center">音声解説</h2>
-              <div class="bg-white dark:bg-black/20 rounded-lg p-6 shadow-sm flex flex-col gap-4">
-                <div class="flex items-center gap-4">
-                  <button class="flex items-center justify-center rounded-full h-12 w-12 bg-primary text-white hover:bg-primary/90 transition-colors flex-shrink-0">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8 5v14l11-7z"></path>
-                    </svg>
-                  </button>
-                  <div class="flex flex-col gap-1 w-full">
-                    <div class="flex justify-between items-center">
-                      <p class="font-medium text-black dark:text-white">スライド全体の音声解説</p>
-                      <p class="text-sm text-black/60 dark:text-white/60">12:34 / 45:10</p>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slidesData = [
+            { content: `
+                <div class="w-full h-full gradient-bg flex flex-col justify-center items-center text-center p-8">
+                    <div class="bg-white/70 backdrop-blur-sm p-8 rounded-xl shadow-lg">
+                        <h1 class="text-5xl md:text-6xl font-black gradient-text tracking-tight">生成AI研修</h1>
+                        <p class="text-2xl md:text-3xl font-bold text-gray-700 mt-4">第1回：活用領域を知る</p>
                     </div>
-                    <div class="w-full h-2 bg-black/10 dark:bg-white/10 rounded-full">
-                      <div class="w-1/4 h-full bg-primary rounded-full"></div>
-                    </div>
-                  </div>
+                    <p class="text-xl text-gray-600 mt-10 font-semibold bg-white/70 backdrop-blur-sm px-6 py-3 rounded-full shadow">本日の講師：後田 | 2025年10月20日</p>
                 </div>
-                <p class="text-sm text-black/80 dark:text-white/80">
-                  この音声解説では、スライド全体を通してAIの基本的な定義から、私たちの日常生活での活用例、そして未来の可能性について詳しく解説しています。
-                </p>
+            `},
+            { title: "はじめに - 本研修の目的", content: `
+                <div class="space-y-8 h-full flex flex-col justify-center">
+                    <div class="card p-6 rounded-xl shadow-lg border border-blue-100">
+                        <h3 class="text-2xl font-bold text-blue-600 mb-3">🎯 本日の目的</h3>
+                        <p class="text-lg md:text-xl leading-relaxed text-gray-700">
+                            具体例を通して生成AIの主要な活用領域を理解し、<br>
+                            <span class="font-bold">皆さまの業務や授業での活用イメージを持っていただくこと</span>
+                        </p>
+                    </div>
+                    <div class="card p-6 rounded-xl shadow-lg border border-green-100">
+                        <h3 class="text-2xl font-bold text-green-600 mb-4">🏁 達成目標</h3>
+                        <div class="space-y-3">
+                            <p class="text-lg text-gray-700 flex items-start"><span class="text-green-500 mr-2">✔</span> 生成AIでできる代表的なことの<span class="font-bold">全体像を知る</span></p>
+                            <p class="text-lg text-gray-700 flex items-start"><span class="text-green-500 mr-2">✔</span> ご自身の業務・授業に即した<span class="font-bold">「まず試す」ユースケースを1つ以上メモする</span></p>
+                        </div>
+                    </div>
+                </div>
+            `},
+            { title: "研修の全体像と本日の位置づけ", content: `
+                <div class="space-y-6">
+                    <div class="flex items-center p-6 rounded-xl shadow-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white transform scale-105">
+                        <div class="text-4xl font-black mr-6">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold">第1回 (本日)：活用領域を知る</h3>
+                            <p class="mt-1 opacity-90 text-sm">まずは「何ができるのか」という全体像を掴む。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-6 rounded-xl shadow-lg bg-white/80 border">
+                        <div class="text-4xl font-black mr-6 text-gray-400">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-700">第2回：ノーコードで作るアプリ&シミュレーション</h3>
+                            <p class="mt-1 text-gray-600 text-sm">より実践的なワークショップ形式で学ぶ。<br><span class="font-semibold text-indigo-500">11月5日(水) 開催予定</span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-6 rounded-xl shadow-lg bg-white/80 border">
+                        <div class="text-4xl font-black mr-6 text-gray-400">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-700">第3回：(テーマ未定)</h3>
+                            <p class="mt-1 text-gray-600 text-sm">参加者の意見を参考に決定</p>
+                        </div>
+                    </div>
+                </div>
+            `},
+            { title: "本日の流れ (約30分)", content: `
+                <ul class="space-y-4 text-xl">
+                    <li class="p-4 rounded-lg bg-gray-50"><span class="font-black text-blue-500 text-2xl w-24 inline-block">3分</span> <span class="font-bold">はじめに</span><p class="pl-24 text-base text-gray-600 -mt-2">目的・アジェンダの確認</p></li>
+                    <li class="p-4 rounded-lg bg-gray-50"><span class="font-black text-blue-500 text-2xl w-24 inline-block">5分</span> <span class="font-bold">注意点</span><p class="pl-24 text-base text-gray-600 -mt-2">生成AIを安全に利用するために</p></li>
+                    <li class="p-4 rounded-lg bg-gray-50"><span class="font-black text-blue-500 text-2xl w-24 inline-block">15分</span> <span class="font-bold">できること【メイン】</span><p class="pl-24 text-base text-gray-600 -mt-2">デモンストレーション中心の活用例紹介</p></li>
+                    <li class="p-4 rounded-lg bg-gray-50"><span class="font-black text-blue-500 text-2xl w-24 inline-block">5分</span> <span class="font-bold">まとめ</span><p class="pl-24 text-base text-gray-600 -mt-2">振り返りと質疑応答</p></li>
+                </ul>
+            `},
+            { title: "生成AIを安全に利用するために", content: `
+                <div class="grid grid-cols-2 gap-4 h-full">
+                    <div class="card p-4 rounded-lg flex flex-col justify-center">
+                        <h3 class="text-xl font-bold mb-2">✅ 基本ルール</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>「道立学校における生成AI利活用ガイドブック」の確認</li>
+                            <li>事前オンライン研修の受講</li>
+                            <li>「利用チェックシート」を学校長に提出・承認</li>
+                        </ul>
+                    </div>
+                    <div class="card p-4 rounded-lg flex flex-col justify-center">
+                        <h3 class="text-xl font-bold mb-2">✅ 利用可能なAI (4つ)</h3>
+                        <p>ChatGPT, Copilot, Gemini, NotebookLM</p>
+                    </div>
+                    <div class="card p-4 rounded-lg flex flex-col justify-center">
+                        <h3 class="text-xl font-bold mb-2">🚫 利用できないもの</h3>
+                         <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>料金が発生するもの</li>
+                            <li>文章生成以外のAI (画像・音声など)<br><span class="text-xs font-semibold">(※現在、道教委へ問い合わせ中)</span></li>
+                        </ul>
+                    </div>
+                    <div class="card p-4 rounded-lg border-red-300 bg-red-50 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-red-700 mb-2">⚠️ 特に注意すべき点</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>個人情報・著作権の扱いに注意</li>
+                            <li class="font-bold">「オプトアウト設定」を必ず有効化</li>
+                        </ul>
+                    </div>
+                </div>
+            `},
+            { title: "本日のメイン：生成AIでできること", content: `
+                <div class="text-center h-full flex flex-col justify-center">
+                    <p class="text-xl text-gray-600 mb-8">生成AIの活用領域は多岐にわたります。本日は、大きく3つのカテゴリに分けてご紹介します。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform"><h4 class="text-xl font-bold text-blue-600">1. 探索・選別・構造化</h4></div>
+                        <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform"><h4 class="text-xl font-bold text-green-600">2. 制作</h4></div>
+                        <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform"><h4 class="text-xl font-bold text-purple-600">3. 共有・運用</h4></div>
+                    </div>
+                </div>
+            `},
+            { subtitle: "① 探索・選別・構造化", content: `
+                <p class="text-lg text-gray-600 mb-6">膨大な情報の中から、必要な情報を見つけ出し、整理・構造化する</p>
+                <div class="space-y-4">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                        <h3 class="text-lg font-bold text-blue-800">[デモ1] Deep Research</h3>
+                        <p class="text-gray-700 mt-1">複雑なテーマをAIが自動で深くリサーチし、レポートを作成</p>
+                    </div>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                        <h3 class="text-lg font-bold text-blue-800">[デモ2] NotebookLM</h3>
+                        <p class="text-gray-700 mt-1">資料から音声要約、マインドマップ、レポート、フラッシュカード等を自動生成</p>
+                    </div>
+                </div>
+            `},
+            { subtitle: "② 制作 Part1", content: `
+                <p class="text-lg text-gray-600 mb-6">文章、画像、教材、アプリなど、様々なコンテンツを創り出す</p>
+                <div class="space-y-4">
+                    <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">[デモ1] nano banana</span>：簡単な指示で画像を生成・編集</div>
+                    <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">[デモ2] Google Storybook</span>：AIと対話しながらオリジナルの絵本を作成</div>
+                </div>
+            `},
+            { subtitle: "② 制作 Part2", content: `
+                 <div class="space-y-4">
+                    <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">[デモ3] 類似テキスト・類題の作成</span>：既存の文章や問題から、似た形式のものを複数作成</div>
+                    <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">[デモ4] Google AI検索</span>：校外学習や旅行などの行程を対話形式で作成</div>
+                </div>
+            `},
+            { subtitle: "② 制作 Part3：ノーコード開発", content: `
+                <p class="text-lg text-gray-600 mb-6">プログラミング不要で、教育用ツールを開発できます</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold text-xl text-indigo-600 mb-2">(1) 個別最適な学習の支援</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700"><li>英単語学習アプリ</li><li>地図パズル</li><li>平方完成ゲーム</li></ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl text-rose-600 mb-2">(2) 協働的な学習の支援</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700"><li>音楽カードアプリ</li><li>レールトラックシミュレーター</li></ul>
+                    </div>
+                </div>
+            `},
+            { subtitle: "② 制作 Part4：ノーコード開発 (続き)", content: `
+                <div>
+                    <h4 class="font-bold text-xl text-teal-600 mb-2">(3) 内容理解の支援</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700 text-lg">
+                        <li>A/D変換シミュレーション</li>
+                        <li>ヤングの実験シミュレーション</li>
+                    </ul>
+                </div>
+                <div class="mt-12 p-4 bg-yellow-100 border-l-4 border-yellow-400 text-center">
+                    <p class="text-lg font-semibold">💡 これらの作り方は、<strong>第2回研修（11/5）</strong>で詳しくご紹介します！</p>
+                </div>
+            `},
+            { subtitle: "③ 共有・運用", content: `
+                <p class="text-lg text-gray-600 mb-6">情報の配信や管理を自動化・効率化する</p>
+                <div class="space-y-4">
+                    <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+                        <h3 class="text-lg font-bold text-purple-800">[デモ] AIワークフロー</h3>
+                        <p class="text-gray-700 mt-1">興味のある分野の最新情報をAIがまとめて届ける「自分専用メルマガ」や、小テストの自動生成・配信などが可能</p>
+                    </div>
+                </div>
+            `},
+            { title: "まとめ - 本日の振り返り", content: `
+                <div class="space-y-6">
+                    <div class="card p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">本日のポイント</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg">
+                            <li>生成AIは<span class="font-bold text-blue-600">「探索」</span><span class="font-bold text-green-600">「制作」</span><span class="font-bold text-purple-600">「運用」</span>など、多様な領域で活用できる</li>
+                            <li>専門知識がなくても直感的に使えるツールが多数ある</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">ゴール達成の確認</h3>
+                        <ul class="space-y-2 text-lg">
+                            <li>☐ 生成AIでできる代表的なことの全体像を知ることができましたか？</li>
+                            <li>☐ ご自身の業務・授業に即した「まず試す」ユースケースを1つ以上メモできましたか？</li>
+                        </ul>
+                    </div>
+                </div>
+            `},
+            { title: "さあ、次はあなたの番です！", content: `
+                <div class="text-center h-full flex flex-col justify-center items-center">
+                    <h2 class="text-4xl font-black gradient-text">「まず試す」ユースケースを考えてみましょう</h2>
+                    <div class="text-xl mt-8 space-y-3 text-gray-700">
+                        <p>本日のデモで興味を持ったものはありましたか？</p>
+                        <p>ご自身の業務や授業で「これなら試せそう」と思ったことは何ですか？</p>
+                    </div>
+                    <p class="mt-10 bg-yellow-100 text-yellow-800 font-bold px-6 py-3 rounded-lg">この後のアンケートで、ぜひあなたのアイディアを教えてください。</p>
+                </div>
+            `},
+            { title: "お知らせとお願い", content: `
+                <div class="space-y-5">
+                    <div class="card p-5 rounded-lg">
+                        <h3 class="font-bold text-lg">1. 復習用コンテンツのご紹介</h3>
+                        <p class="text-gray-600">本日のスライド、デモ用コンテンツ、音声解説などをGoogleサイトで共有します。</p>
+                    </div>
+                    <div class="card p-5 rounded-lg">
+                        <h3 class="font-bold text-lg">2. 研修第2回の予告</h3>
+                        <p class="text-gray-600"><span class="font-semibold">日時：</span>11月5日(水)<br><span class="font-semibold">内容：</span>「ノーコードで作るアプリ&シミュレーション」</p>
+                    </div>
+                    <div class="card p-5 rounded-lg">
+                        <h3 class="font-bold text-lg">3. 事後アンケートご協力のお願い</h3>
+                        <p class="text-gray-600">研修終了後、チャットにてアンケートURLをお送りします。</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-center text-xl font-semibold">ご清聴いただき、ありがとうございました。</p>
+            `}
+        ];
+
+        const container = document.getElementById('presentation-container');
+        let currentSlide = 0;
+
+        function createSlide(slideData) {
+            const slideEl = document.createElement('div');
+            slideEl.className = 'slide';
+            if (slideData.content.includes('gradient-bg')) {
+                slideEl.innerHTML = slideData.content;
+                slideEl.style.padding = '0';
+            } else {
+                let headerHTML = '';
+                if (slideData.title) {
+                    headerHTML = `<div class="slide-header"><h2 class="text-2xl md:text-3xl font-bold text-gray-800">${slideData.title}</h2></div>`;
+                } else if (slideData.subtitle) {
+                    headerHTML = `<div class="slide-header"><h3 class="text-xl md:text-2xl font-semibold text-gray-700">${slideData.subtitle}</h3></div>`;
+                }
+                slideEl.innerHTML = `
+                    ${headerHTML}
+                    <div class="flex-grow h-full">${slideData.content}</div>
+                `;
+            }
+            return slideEl;
+        }
+
+        const slideElements = slidesData.map(createSlide);
+        slideElements.forEach(el => container.appendChild(el));
+
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideCounter = document.getElementById('slide-counter');
+
+        function updateSlideView() {
+            slideElements.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            slideCounter.textContent = `${currentSlide + 1} / ${slidesData.length}`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slidesData.length - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) { currentSlide--; updateSlideView(); }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slidesData.length - 1) { currentSlide++; updateSlideView(); }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextBtn.click(); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
+        });
+
+        updateSlideView();
+    });
+    </script>
+</body>
+</html>
+  </template>
+
+  <!-- ② Genspark（全ページ） -->
+  <template id="tpl-genspark">
+<!-- ここは提供いただいた「スライド資料②（Genspark）」を**そのまま**貼り付け -->
+<!-- 開始 -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>生成AI研修（全3回）初回：活用領域を知る — 統合版（1-15）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+/* ===== Base / viewport ===== */
+:root { --base-w:1280; --base-h:720; }
+html,body{
+  height:100%; margin:0; padding:0; overflow:hidden;
+  font-family:"Noto Sans JP","Hiragino Sans","Meiryo",sans-serif; background:#fff; color:#222;
+}
+.deck{ position:fixed; inset:0; background:#fff; }
+.stage{
+  position:relative; width:min(100vw, calc(100vh * (16/9)));
+  height:calc(min(100vw, calc(100vh * (16/9))) * 9/16);
+  overflow:hidden;
+}
+.canvas{
+  position:absolute; top:0; left:0;
+  width:calc(var(--base-w) * 1px); height:calc(var(--base-h) * 1px);
+  transform-origin:top left; background:#fff;
+}
+.slide{ position:absolute; inset:0; display:none; }
+.slide.active{ display:block; }
+
+/* ===== Common visuals ===== */
+.grid-bg{
+  width:100%; height:100%; position:relative; background:#fff;
+  background-image:
+    linear-gradient(rgba(200,200,200,.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,200,200,.15) 1px, transparent 1px);
+  background-size:20px 20px;
+}
+.frame{ box-sizing:border-box; padding:24px; width:100%; height:100%; position:relative; }
+.slide-title{ margin-bottom:24px; }
+.title-text{ font-size:36px; font-weight:700; color:#444; }
+.number-circle{
+  width:60px; height:60px; background:#7BB5A3; border-radius:50%;
+  color:#fff; display:flex; justify-content:center; align-items:center;
+  font-size:28px; font-weight:500; margin-right:25px; flex-shrink:0;
+}
+.content-container{ display:flex; flex-direction:column; gap:18px; }
+.content-row{ display:flex; align-items:flex-start; }
+.content-text{ background:#f2f2f2; border-radius:5px; padding:18px 22px; font-size:20px; color:#444; width:100%; }
+.content-description{ color:#666; font-size:18px; line-height:1.6; }
+.company-signature{ position:absolute; bottom:24px; right:32px; font-size:14px; color:#7BB5A3; font-weight:500; }
+
+/* ===== Absolute layout slides (5,6,14) を共通化 ===== */
+.abs-title{ position:absolute; top:12px; right:16px; background:rgba(136,136,136,.9); color:#fff; padding:6px 12px; font-size:20px; font-weight:500; }
+.abs-wrap { position:absolute; top:48px; left:24px; width:1232px; } /* 1280 - 24*2 */
+.abs-sub { background:#7BB5A3; color:#fff; padding:12px 18px; font-size:22px; font-weight:500; display:inline-block; }
+.abs-box { border:1px solid #a9d3c7; padding:22px 24px; margin-top:16px; background:#fff; width:100%; box-sizing:border-box; }
+.abs-par { font-size:16px; line-height:1.7; color:#444; margin:10px 0; }
+.icon-text{ display:flex; align-items:flex-start; gap:8px; font-size:15px; margin:6px 0; }
+.icon-text i{ color:#7BB5A3; margin-top:3px; min-width:18px; text-align:center; }
+.section-header{ font-weight:500; font-size:18px; color:#444; margin:18px 0 10px; display:flex; align-items:center; gap:8px; }
+.highlight{ background:rgba(123,181,163,.15); padding:2px 4px; border-radius:3px; font-weight:500; }
+.ai-list{ display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+.ai-item{ background:#f5f5f5; border-radius:4px; padding:6px 10px; font-size:14px; font-weight:500; display:flex; align-items:center; gap:6px; }
+.note-box{ background:rgba(255,240,200,.3); border-left:3px solid #FFB74D; padding:10px 12px; margin:12px 0; font-size:14px; }
+
+/* ===== “下はみ出し”対策の圧縮（5/7/8専用） ===== */
+.compact *{ letter-spacing:.01em; }
+#s5 .abs-box{ padding:18px 20px; }
+#s7 .frame, #s8 .frame{ padding:16px; }
+#s7 .slide-title, #s8 .slide-title{ margin-bottom:14px; }
+#s7 .subtitle{ font-size:18px; color:#666; margin:6px 0 8px 10px; }
+#s7 .content-container, #s8 .content-container{ gap:12px; margin-top:12px; }
+#s7 .number-circle, #s8 .number-circle{ width:48px; height:48px; font-size:22px; margin-right:16px; }
+#s7 .content-text, #s8 .content-text{ padding:14px 16px; font-size:18px; }
+#s7 .content-description, #s8 .content-description{ font-size:16px; line-height:1.5; margin-bottom:6px; }
+#s7 .feature-list{ margin:4px 0 0 18px; }
+#s7 .feature-item{ font-size:14px; margin-bottom:4px; }
+#s8 .subtitle{ margin-left:56px; font-size:18px; }
+#s8 .feature-point{ display:block; margin-top:8px; padding-left:14px; position:relative; }
+#s8 .feature-point:before{ content:"•"; position:absolute; left:0; color:#7BB5A3; }
+#s8 .company-signature{ bottom:20px; }
+
+/* ===== Slide 1 ===== */
+#s1 .content-box{ position:absolute; top:50px; left:50px; width:1180px; height:620px; background:#7BB5A3; border-radius:5px; overflow:hidden; }
+#s1 .title-container{ padding:60px 80px; }
+#s1 .title{ color:#fff; font-size:52px; font-weight:700; line-height:1.4; letter-spacing:1px; }
+#s1 .subtitle{ color:rgba(255,255,255,.9); font-size:24px; font-weight:500; margin-top:20px; letter-spacing:.5px;}
+#s1 .presenter-info{ position:absolute; bottom:40px; left:80px; color:#fff; }
+#s1 .presenter-name{ font-size:22px; font-weight:700; margin-bottom:5px;}
+#s1 .presenter-title{ font-size:16px; margin-bottom:5px;}
+#s1 .presenter-company{ font-size:18px; font-weight:500; margin-bottom:15px;}
+#s1 .presenter-contact{ display:flex; gap:25px; font-size:14px; color:rgba(255,255,255,.9);}
+#s1 .presenter-contact i{ margin-right:8px; }
+#s1 .decoration-element{ position:absolute; right:80px; bottom:80px; color:#fff;}
+#s1 .decoration-element svg{ width:120px; height:120px; stroke:rgba(255,255,255,.25); stroke-width:1; fill:none;}
+#s1 .highlight-badge{
+  position:absolute; top:60px; right:80px; background:rgba(255,255,255,.2);
+  color:#fff; padding:8px 15px; border-radius:20px; font-size:14px; font-weight:500; display:flex; align-items:center;
+}
+#s1 .highlight-badge i{ margin-right:6px; }
+
+/* ===== Slide 2 / 3 共通 ===== */
+#s2 .frame, #s3 .frame{ padding:24px; }
+#s2 .content-container, #s3 .content-container{ gap:20px; }
+#s2 .number-circle, #s3 .number-circle{ }
+
+/* ===== Slide 4 ===== */
+#s4 .content-box{ display:flex; position:relative; height:100%; }
+#s4 .session-icon{ position:absolute; top:12px; right:12px; display:flex; align-items:center; gap:8px; color:#7BB5A3; }
+#s4 .sidebar{
+  width:320px; height:480px; margin:24px 0 24px 24px; background:#7BB5A3;
+  border-radius:5px; display:flex; justify-content:center; align-items:center; flex-direction:column; position:relative;
+}
+#s4 .toc-title{ color:#fff; font-size:48px; font-weight:700; letter-spacing:2px; margin-bottom:5px; }
+#s4 .toc-subtitle{ color:#fff; font-size:24px; font-weight:500; letter-spacing:1px; margin-bottom:15px; }
+#s4 .dotted-line{ width:120px; height:12px; display:flex; justify-content:space-between; margin-top:8px; }
+#s4 .dot{ width:8px; height:8px; background:#fff; border-radius:50%; opacity:.8; }
+#s4 .content-list{ margin-left:48px; margin-top:32px; width:800px; display:flex; flex-direction:column; justify-content:center; }
+#s4 .list-item{ display:flex; align-items:center; margin-bottom:28px; }
+#s4 .number{ font-size:54px; font-weight:700; color:transparent; -webkit-text-stroke:1px #999; margin-right:24px; line-height:1; width:100px; text-align:right; }
+#s4 .item-text{ font-size:24px; color:#444; font-weight:500; line-height:1.4; }
+#s4 .item-detail{ font-size:18px; color:#666; margin-top:5px; }
+#s4 .presenter-info{ position:absolute; bottom:16px; left:0; width:100%; text-align:center; color:#fff; font-size:16px; padding:0 15px; box-sizing:border-box; }
+#s4 .time-badge{ display:inline-block; background:rgba(123,181,163,.2); padding:3px 8px; border-radius:12px; color:#555; font-size:16px; font-weight:500; }
+#s4 .footer{ position:absolute; bottom:16px; right:24px; color:#888; font-size:14px; }
+
+/* ===== Slide 7 specific bits ===== */
+#s7 .feature-icon{ color:#7BB5A3; margin-right:8px; }
+#s7 .example-box{ background:rgba(123,181,163,.15); border-radius:5px; padding:10px 12px; margin-top:6px; font-size:15px; color:#555; font-style:italic; }
+
+/* ===== Slide 8 small bits ===== */
+#s8 .tool-icon{ display:inline-block; margin-right:6px; color:#5a8f83; }
+
+/* ===== Slide 9 ===== */
+#s9 .session-info{ position:absolute; bottom:22px; right:28px; font-size:14px; color:#7BB5A3; font-weight:500; }
+
+/* ===== Slide 10 ===== */
+#s10 .benefits{ display:flex; flex-wrap:wrap; gap:10px; margin:10px 0; }
+#s10 .benefit-item{ display:flex; align-items:center; background:rgba(255,255,255,.6); padding:6px 12px; border-radius:4px; font-size:15px; color:#555; border:1px solid rgba(123,181,163,.3); }
+#s10 .benefit-item i{ color:#7BB5A3; margin-right:6px; font-size:14px; }
+#s10 .sub-items{ display:flex; gap:12px; margin:8px 0 10px; flex-wrap:wrap; }
+#s10 .sub-item{ background:rgba(123,181,163,.15); padding:6px 12px; border-radius:4px; font-size:16px; color:#444; }
+
+/* ===== Slide 11 ===== */
+#s11 .subtitle{ font-size:22px; font-weight:700; color:#7BB5A3; margin:10px 0 10px; }
+#s11 .next-session-notice{
+  margin-top:16px; background:rgba(123,181,163,.15); border:1px solid #7BB5A3; border-radius:5px;
+  padding:16px 18px; display:flex; align-items:center; gap:16px;
+}
+#s11 .notice-icon{ font-size:28px; color:#7BB5A3; }
+#s11 .notice-text{ font-size:18px; color:#444; line-height:1.5; }
+#s11 .notice-highlight{ font-weight:600; color:#2c7a65; }
+
+/* ===== Slide 12 ===== */
+#s12 .header{ margin-bottom:18px; }
+#s12 .title-number{ font-size:48px; font-weight:700; color:transparent; -webkit-text-stroke:1.5px #666; margin-right:12px; vertical-align:middle; }
+#s12 .subtitle{ font-size:18px; color:#555; margin-left:70px; font-weight:500; }
+#s12 .research-container{ display:flex; justify-content:center; gap:40px; }
+#s12 .research-item{ width:45%; }
+#s12 .research-header{ background:rgba(120,120,120,.9); color:#fff; padding:8px; font-size:20px; text-align:center; width:220px; margin:0 auto; position:relative; z-index:10; }
+#s12 .research-content{ background:#7BB5A3; padding:20px 16px 14px; margin-top:-16px; color:#fff; font-size:16px; line-height:1.5; height:300px; display:flex; flex-direction:column; overflow:auto; }
+#s12 .company-example{ background:rgba(255,255,255,.2); padding:8px; border-radius:5px; margin-top:8px; font-size:15px; }
+#s12 .icon-feature{ font-size:28px; margin-bottom:10px; text-align:center; }
+#s12 .key-benefit{ margin-top:10px; font-weight:500; font-size:15px; }
+#s12 .usage-examples{ margin-top:8px; font-size:14px; background:rgba(255,255,255,.15); padding:6px; border-radius:5px; }
+#s12 .usage-examples ul{ margin:5px 0 5px 18px; padding:0; }
+#s12 .usage-examples li{ margin-bottom:3px; }
+#s12 .company-signature{ font-size:14px; color:#333; text-align:right; margin-top:10px; }
+
+/* ===== Slide 13 ===== */
+#s13 .title-section{ display:flex; align-items:center; gap:12px; }
+#s13 .title-number{ font-size:54px; font-weight:700; color:transparent; -webkit-text-stroke:1px #999; }
+#s13 .subtitle{ font-size:16px; color:#666; margin-top:5px; margin-left:86px; line-height:1.6; }
+#s13 .section-header{ font-size:22px; font-weight:700; color:#444; margin:20px 0 12px; padding-left:26px; position:relative; }
+#s13 .section-header::before{ content:""; position:absolute; left:0; top:50%; transform:translateY(-50%); width:18px; height:18px; background:#7BB5A3; border-radius:50%; }
+#s13 .content-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:12px; padding:0 16px; }
+#s13 .grid-item{ display:flex; align-items:flex-start; }
+#s13 .number-box{ width:60px; height:60px; background:#7BB5A3; color:#fff; font-size:28px; font-weight:500; display:flex; justify-content:center; align-items:center; margin-right:16px; }
+#s13 .item-text{ font-size:24px; color:#555; font-weight:500; }
+#s13 .item-desc{ font-size:16px; color:#666; margin-top:6px; line-height:1.5; }
+#s13 .divider{ width:100%; height:1px; background:rgba(123,181,163,.3); margin:24px 0 18px; }
+
+/* ===== Slide 14 ===== */
+#s14 .question{ font-size:18px; line-height:1.8; color:#444; margin:14px 0; padding-left:24px; position:relative; }
+#s14 .question:before{ content:""; position:absolute; left:0; top:8px; width:8px; height:8px; background:#7BB5A3; border-radius:50%; }
+#s14 .icon{ color:#7BB5A3; margin-right:8px; }
+
+/* ===== Slide 15 ===== */
+#s15 .content-container{ gap:14px; }
+#s15 .icon-circle{ display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff; }
+#s15 .date-badge{ background:rgba(123,181,163,.2); color:#444; padding:4px 10px; border-radius:4px; font-size:16px; margin-left:10px; display:inline-block; }
+
+/* ===== Controls / print ===== */
+.controls{
+  position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+  display:flex; align-items:center; gap:10px; z-index:50;
+  background:rgba(255,255,255,.9); border:1px solid #e6e6e6;
+  padding:6px 10px; border-radius:999px; backdrop-filter:saturate(1.2) blur(6px);
+  box-shadow:0 4px 16px rgba(0,0,0,.07); font-size:14px;
+}
+.btn{ border:1px solid #ddd; background:#fff; border-radius:999px; padding:6px 10px; cursor:pointer; }
+.btn:active{ transform:translateY(1px); }
+.dots{ display:flex; gap:6px; margin:0 6px; flex-wrap:wrap; max-width:min(90vw,900px); }
+.dot{ width:8px; height:8px; border-radius:50%; background:#d0d0d0; cursor:pointer; }
+.dot.active{ background:#7BB5A3; }
+
+@media print{
+  body{ overflow:visible; }
+  .deck,.stage,.canvas{ position:static; width:auto; height:auto; transform:none !important; }
+  .slide{ display:block !important; page-break-after:always; }
+  .controls{ display:none; }
+}
+</style>
+</head>
+<body>
+  <div class="deck">
+    <div class="stage">
+      <div class="canvas" id="canvas">
+        <!-- ========= Slide 1 ========= -->
+        <section class="slide active" id="s1" aria-label="タイトル">
+          <div class="grid-bg">
+            <div class="content-box">
+              <div class="title-container">
+                <div class="title">生成AI研修<br/>（全3回）初回：<br/>活用領域を知る</div>
+                <div class="subtitle">具体例を通して生成AIの主要な活用領域を理解する</div>
+              </div>
+              <div class="highlight-badge"><i class="fas fa-calendar-alt"></i> 2025年10月22日(水) 16:00-16:30</div>
+              <div class="presenter-info">
+                <div class="presenter-name">後田</div>
+                <div class="presenter-title">教育ICT推進担当</div>
+                <div class="presenter-company">北海道教育委員会</div>
+                <div class="presenter-contact">
+                  <div><i class="fas fa-envelope"></i> support@education.hokkaido.jp</div>
+                  <div><i class="fas fa-globe"></i> education.hokkaido.jp</div>
+                </div>
+              </div>
+              <div class="decoration-element">
+                <svg stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <path d="M10 16L8 21 12 20 16 21 14 16"></path>
+                  <path d="M7 8L3 4"></path>
+                  <path d="M17 8L21 4"></path>
+                </svg>
               </div>
             </div>
-          </div> <!-- /stack -->
-        </div>
-      </main>
+          </div>
+        </section>
+
+        <!-- ========= Slide 2 ========= -->
+        <section class="slide" id="s2" aria-label="はじめに">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">はじめに - 本研修の目的</div></div>
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle">1</div>
+                <div class="content-text">
+                  <strong>本日の目的</strong>
+                  <div class="content-description">具体例を通して生成AIの主要な活用領域を理解し、皆さまの業務や授業での活用イメージを持っていただくこと</div>
+                </div>
+              </div>
+              <div class="content-row">
+                <div class="number-circle">2</div>
+                <div class="content-text">
+                  <strong>達成目標</strong>
+                  <div class="content-description">生成AIでできる代表的なことの全体像を知る</div>
+                </div>
+              </div>
+              <div class="content-row">
+                <div class="number-circle">3</div>
+                <div class="content-text">
+                  <strong>達成目標</strong>
+                  <div class="content-description">ご自身の業務・授業に即した「まず試す」ユースケースを1つ以上メモする</div>
+                </div>
+              </div>
+            </div>
+            <div class="company-signature">生成AI研修 2025</div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 3 ========= -->
+        <section class="slide" id="s3" aria-label="全体像">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">研修の全体像と本日の位置づけ</div></div>
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle">1</div>
+                <div class="content-text">
+                  <strong>第1回（本日）：活用領域を知る</strong>
+                  <div class="content-description">生成AIで「何ができるのか」という全体像を掴みます。</div>
+                </div>
+              </div>
+              <div class="content-row">
+                <div class="number-circle">2</div>
+                <div class="content-text">
+                  <strong>第2回：ノーコードで作るアプリ&シミュレーション</strong>
+                  <div class="content-description">具体的なアプリ開発の手順やコツを学ぶワークショップです。<br/>(予告) 11月5日(水) 開催予定</div>
+                </div>
+              </div>
+              <div class="content-row">
+                <div class="number-circle">3</div>
+                <div class="content-text">
+                  <strong>第3回：(テーマ未定)</strong>
+                </div>
+              </div>
+            </div>
+            <div class="company-signature">生成AI研修 全3回プログラム</div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 4 ========= -->
+        <section class="slide" id="s4" aria-label="アジェンダ">
+          <div class="grid-bg">
+            <div class="session-icon"><i class="fas fa-robot"></i><div class="session-text">生成AI研修（全3回）初回</div></div>
+            <div class="content-box">
+              <div class="sidebar">
+                <div class="toc-title">アジェンダ</div>
+                <div class="toc-subtitle">本日の流れ</div>
+                <div class="dotted-line">
+                  <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                  <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+                <div class="presenter-info">
+                  <div class="presenter-name">活用領域を知る</div>
+                  <div class="presenter-title">2025年10月22日(水)<br/>16:00-16:30</div>
+                </div>
+              </div>
+              <div class="content-list">
+                <div class="list-item">
+                  <div class="number">01.</div>
+                  <div class="item-text">イントロ<span class="time-badge">3分</span>
+                    <div class="item-detail">目的、位置づけ、アジェンダの確認</div>
+                  </div>
+                </div>
+                <div class="list-item"><div class="number">02.</div><div class="item-text">生成AIを利用する際の注意点<span class="time-badge">5分</span></div></div>
+                <div class="list-item">
+                  <div class="number">03.</div>
+                  <div class="item-text">生成AIでできること<span class="time-badge">15分</span>
+                    <div class="item-detail">具体的な活用事例をデモ中心にご紹介します</div>
+                  </div>
+                </div>
+                <div class="list-item"><div class="number">04.</div><div class="item-text">まとめ<span class="time-badge">5分</span></div></div>
+              </div>
+            </div>
+            <div class="footer"><div>生成AI研修（全3回）初回：活用領域を知る</div></div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 5 ========= -->
+        <section class="slide compact" id="s5" aria-label="注意点">
+          <div class="grid-bg">
+            <div class="abs-title">生成AIを利用する際の注意点</div>
+            <div class="abs-wrap">
+              <div class="abs-sub">安全かつ効果的に活用するための重要ポイント</div>
+              <div class="abs-box">
+                <div class="abs-par"><strong>はじめに</strong>：生成AIを安全かつ効果的に活用するための重要なポイントを確認しましょう</div>
+
+                <div class="section-header"><i class="fas fa-book"></i><span>道立学校における生成AI利活用ガイドブック</span></div>
+                <div class="abs-par">ガイドブックでは、利用にあたって以下のような手続きが定められています：</div>
+                <div class="icon-text"><i class="fas fa-graduation-cap"></i><span>事前にオンライン研修を受講すること</span></div>
+                <div class="icon-text"><i class="fas fa-clipboard-list"></i><span>「利用チェックシート」を各所属の情報セキュリティ管理者（学校長）に提出し、承認を受けること</span></div>
+                <div class="icon-text"><i class="fas fa-robot"></i><span>使用できる生成AIは以下の4つに限定：</span></div>
+                <div class="ai-list">
+                  <div class="ai-item"><i class="fas fa-comment-dots"></i>ChatGPT</div>
+                  <div class="ai-item"><i class="fas fa-microchip"></i>Microsoft Copilot</div>
+                  <div class="ai-item"><i class="fas fa-brain"></i>Gemini</div>
+                  <div class="ai-item"><i class="fas fa-book-open"></i>NotebookLM</div>
+                </div>
+                <div class="icon-text"><i class="fas fa-ban"></i><span>料金が発生するものや、画像・音声など文章生成AI以外は認めていません</span></div>
+
+                <div class="note-box"><i class="fas fa-info-circle"></i> 現状では活用の幅が急速に拡大。道教委の活用事例に画像生成が含まれるものもあり、研究グループが問い合わせ中です。</div>
+
+                <div class="section-header"><i class="fas fa-exclamation-circle"></i><span>特に注意すべき点</span></div>
+                <div class="abs-par">個人情報や著作権に関して、<span class="highlight">入力データの学習利用オプトアウト設定</span>を有効にした上で利用することが求められています。</div>
+                <div class="icon-text"><i class="fas fa-user-shield"></i><span>個人情報：生徒の氏名・成績などは入力しない</span></div>
+                <div class="icon-text"><i class="fas fa-copyright"></i><span>著作権：教材や文献の丸写し入力は侵害の恐れ</span></div>
+                <div class="icon-text"><i class="fas fa-check-double"></i><span>検証：出力は常に人間が確認し、正確性を検証</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 6 ========= -->
+        <section class="slide" id="s6" aria-label="生成AIでできること">
+          <div class="grid-bg">
+            <div class="abs-title">生成AIでできること</div>
+            <div class="abs-wrap">
+              <div class="abs-sub">主な活用領域</div>
+              <div class="abs-box">
+                <div class="abs-par" style="font-size:19px;color:#2c7a65;"><strong>本日のメインパート</strong>：デモを交え、具体的な活用例を見ていきます。</div>
+                <div class="abs-par"><span class="section-header" style="margin:0 0 6px 0;"><i class="fas fa-search"></i><span>探索・選別・構造化</span></span>膨大な情報から必要な情報を抽出・構造化。要点抽出や自動要約など。</div>
+                <div class="abs-par"><span class="section-header" style="margin:0 0 6px 0;"><i class="fas fa-paint-brush"></i><span>制作</span></span>文章・画像・教材・アプリなど多様なコンテンツを生成。</div>
+                <div class="abs-par"><span class="section-header" style="margin:0 0 6px 0;"><i class="fas fa-share-alt"></i><span>共有・運用</span></span>最新情報の自動配信、課題の自動配信・管理などを効率化。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 7 ========= -->
+        <section class="slide compact" id="s7" aria-label="できること① 探索・選別・構造化">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">できること① 探索・選別・構造化</div></div>
+            <div class="subtitle">膨大な情報の中から、必要な情報を見つけ出し、整理・構造化する</div>
+
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle">1</div>
+                <div class="content-text">
+                  <strong>デモ１：Deep Research</strong>
+                  <div class="content-description">複雑なテーマを自動で深くリサーチし、構造化レポートを作成。Googleドキュメントに出力して共有も容易。</div>
+                  <ul class="feature-list">
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i>多数サイトを横断し、多角的に収集</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i>見出し・箇条書きで構造化</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i>市場調査・競合分析に最適</li>
+                  </ul>
+                  <div class="example-box">実例：「生成AIを活用した教育事例」を世界各国から網羅、出典付きで整理</div>
+                </div>
+              </div>
+
+              <div class="content-row">
+                <div class="number-circle">2</div>
+                <div class="content-text">
+                  <strong>デモ２：NotebookLM</strong>
+                  <div class="content-description">資料を読み込ませるだけで音声要約、マインドマップ、レポート等を自動生成。</div>
+                  <ul class="feature-list">
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i>複数資料を統合的に分析</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i>音声解説でながら学習</li>
+                    <li class="feature-item"><i class="fas fa-check feature-icon"></i>概念関係を可視化</li>
+                  </ul>
+                  <div class="example-box">実例：Deep Research結果を読み込ませ、音声解説と整理レポートを自動生成</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 8 ========= -->
+        <section class="slide compact" id="s8" aria-label="できること② 制作 Part1">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">できること② 制作 Part1</div></div>
+            <div class="subtitle">文章、画像、教材、アプリなど、様々なコンテンツを創り出す</div>
+
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle">1</div>
+                <div class="content-text">
+                  <strong class="content-highlight"><i class="fas fa-image tool-icon"></i>nano banana</strong>
+                  <div class="content-description">指示だけで画像の生成・編集。人物や背景を保った部分編集や、手書きスケッチのクリーン化が可能。</div>
+                  <span class="feature-point">教材向けの図解を短時間で作成</span>
+                  <span class="feature-point">一貫性のあるリビジョンが容易</span>
+                </div>
+              </div>
+
+              <div class="content-row">
+                <div class="number-circle">2</div>
+                <div class="content-text">
+                  <strong class="content-highlight"><i class="fas fa-book-open tool-icon"></i>Google Storybook</strong>
+                  <div class="content-description">単元内容を入力するだけで絵本形式の教材を自動生成。導入・まとめに効果的。</div>
+                  <span class="feature-point">テキスト入力だけで完成度の高い絵本</span>
+                  <span class="feature-point">学習の興味喚起と定着に有効</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="company-signature">生成AI研修 2025年10月22日</div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 9 ========= -->
+        <section class="slide" id="s9" aria-label="できること② 制作 Part2">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">制作 Part2</div></div>
+
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle">3</div>
+                <div class="content-text">
+                  <strong>類似テキスト・類題の作成</strong>
+                  <div class="content-description">既存の問題から、形式や難易度が近い問題を複数パターンで生成。誤答の作成と修正学習にも活用。</div>
+                  <div class="use-case" style="background:rgba(123,181,163,.1);border-radius:4px;padding:10px 12px;margin-top:8px;">
+                    <div class="use-case-title" style="font-weight:500;color:#2c7a65;margin-bottom:4px;">活用例：誤答修正学習</div>
+                    生徒が間違いやすいポイントをAIに抽出させ、誤答例を提示→修正させる活動で理解を深化。
+                  </div>
+                </div>
+              </div>
+
+              <div class="content-row">
+                <div class="number-circle">4</div>
+                <div class="content-text">
+                  <strong>Google AI検索</strong>
+                  <div class="content-description">行程作成を対話で。目的地・予算・テーマに応じた校外学習や旅行プランを共同で設計。</div>
+                  <div class="use-case" style="background:rgba(123,181,163,.1);border-radius:4px;padding:10px 12px;margin-top:8px;">
+                    <div class="use-case-title" style="font-weight:500;color:#2c7a65;margin-bottom:4px;">活用例：対話式プラン作成</div>
+                    例：「午前・午後で異なる産業見学の札幌1日コース」「科学好き中学生向け京都2日間」など複合条件で提案。
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="session-info">生成AI研修（第1回）：活用領域を知る</div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 10 ========= -->
+        <section class="slide" id="s10" aria-label="できること② 制作 Part3 ノーコード開発">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">できること② 制作 Part3 ノーコード開発</div></div>
+
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle">1</div>
+                <div class="content-text">
+                  <strong>個別最適な学習の支援</strong>
+                  <div class="content-description">理解度・学習スタイルに合わせた教材・即時フィードバック・ゲーミフィケーション等。</div>
+                  <div class="benefits">
+                    <div class="benefit-item"><i class="fas fa-check-circle"></i>即時フィードバック</div>
+                    <div class="benefit-item"><i class="fas fa-gamepad"></i>ゲーム要素で意欲向上</div>
+                    <div class="benefit-item"><i class="fas fa-laptop-house"></i>高いアクセス性</div>
+                    <div class="benefit-item"><i class="fas fa-pencil-ruler"></i>授業に合わせて自由設計</div>
+                  </div>
+                  <div class="sub-items">
+                    <div class="sub-item">英単語学習アプリ</div><div class="sub-item">地図パズル</div><div class="sub-item">平方完成ゲーム</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="content-row">
+                <div class="number-circle">2</div>
+                <div class="content-text">
+                  <strong>協働的な学習の支援</strong>
+                  <div class="content-description">グループワークや共同作業の観察・支援をデジタル空間で再設計。遠隔授業にも有効。</div>
+                  <div class="sub-items"><div class="sub-item">音楽カードアプリ</div><div class="sub-item">レールトラックシミュレーター</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="company-signature">生成AI研修 第1回：活用領域を知る</div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 11 ========= -->
+        <section class="slide" id="s11" aria-label="制作 Part4 ノーコード開発（続き）">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">できること② 制作 Part4 ノーコード開発（続き）</div></div>
+
+            <div class="subtitle">(3) 内容理解の支援</div>
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle">1</div>
+                <div class="content-text">
+                  <strong>A/D変換シミュレーション</strong>
+                  <div class="content-description">サンプリング周波数・量子化ビット数の違いによる影響を体験的に学習。</div>
+                </div>
+              </div>
+              <div class="content-row">
+                <div class="number-circle">2</div>
+                <div class="content-text">
+                  <strong>ヤングの実験シミュレーション</strong>
+                  <div class="content-description">二重スリット実験をインタラクティブに。パラメータで干渉縞の変化を観察。</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="next-session-notice">
+              <div class="notice-icon"><i class="fas fa-calendar-alt"></i></div>
+              <div class="notice-text">これらの作り方は <span class="notice-highlight">第2回「ノーコードで作るアプリ&シミュレーション」（11月5日）</span>で詳しく紹介します。</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 12 ========= -->
+        <section class="slide" id="s12" aria-label="できること③ 共有・運用">
+          <div class="grid-bg frame">
+            <div class="header">
+              <span class="title-number">c)</span>
+              <span class="title-text">共有・運用</span>
+              <div class="subtitle">情報の配信や管理を自動化・効率化する</div>
+            </div>
+
+            <div class="research-container">
+              <div class="research-item">
+                <div class="research-header">AIワークフロー：自分専用メルマガ</div>
+                <div class="research-content">
+                  <div class="icon-feature"><i class="fas fa-newspaper"></i></div>
+                  <div>興味分野の最新情報をAIが自動収集・要約し、定期メール配信。</div>
+                  <div class="company-example">教育実践の最新事例を継続収集するワークフロー例を紹介。</div>
+                  <div class="usage-examples"><strong>その他：</strong>
+                    <ul><li>毎授業の小テスト自動生成</li><li>時事読解の素材集め</li><li>単元ごとの復習資料を定期配信</li></ul>
+                  </div>
+                  <div class="key-benefit">チャット指示で設計可能。一部API設定は必要だが初心者でも実行可能。</div>
+                </div>
+              </div>
+
+              <div class="research-item">
+                <div class="research-header">課題の自動配信・管理</div>
+                <div class="research-content">
+                  <div class="icon-feature"><i class="fas fa-tasks"></i></div>
+                  <div>ルールに基づき課題を自動配信し、提出・理解度を追跡。解答後のフィードバックも自動化。</div>
+                  <div class="usage-examples"><strong>自動化例：</strong>
+                    <ul><li>提出状況の集計とリマインド</li><li>解答傾向から指導ポイント抽出</li><li>次回課題の難易度最適化</li></ul>
+                  </div>
+                  <div class="key-benefit">直感操作で構築・運用。初期設定後はほぼ自動で回る。</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="company-signature">※上記ワークフローは対話で構築可能。詳細手順も提供されます。</div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 13 ========= -->
+        <section class="slide" id="s13" aria-label="まとめ - 本日の振り返り">
+          <div class="grid-bg frame">
+            <div class="header">
+              <div class="title-section">
+                <div class="title-number">4.</div>
+                <div class="title-text">まとめ - 本日の振り返り</div>
+              </div>
+            </div>
+
+            <div class="section-header">本日のポイント</div>
+            <div class="content-grid">
+              <div class="grid-item">
+                <div class="number-box">1</div>
+                <div>
+                  <div class="item-text">多様な活用領域</div>
+                  <div class="item-desc">「探索」「制作」「運用」など多方面で活用可能。</div>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="number-box">2</div>
+                <div>
+                  <div class="item-text">直感的なツール</div>
+                  <div class="item-desc">専門知識がなくても使えるツールが多数。</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-header">達成目標の確認</div>
+            <div class="content-grid">
+              <div class="grid-item">
+                <div class="number-box">1</div>
+                <div>
+                  <div class="item-text">全体像の理解</div>
+                  <div class="item-desc">生成AIでできる代表例の全体像を把握できましたか？</div>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="number-box">2</div>
+                <div>
+                  <div class="item-text">活用ケースの検討</div>
+                  <div class="item-desc">「まず試す」ユースケースを1つ以上メモできましたか？</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 14 ========= -->
+        <section class="slide" id="s14" aria-label="次のアクションへ">
+          <div class="grid-bg">
+            <div class="abs-title">まとめ</div>
+            <div class="abs-wrap">
+              <div class="abs-sub">さあ、次はあなたの番です</div>
+              <div class="abs-box">
+                <div class="abs-par" style="font-weight:500;color:#2c7a65;">「まず試す」ユースケースを考えてみましょう</div>
+                <div class="question">本日のデモで興味を持ったものはありましたか？</div>
+                <div class="question">ご自身の業務や授業で「これなら試せそう」と思ったことは何ですか？</div>
+                <div class="abs-par">生成AIの活用は小さな一歩から。簡単なことから試し、徐々に応用範囲を広げていきましょう。</div>
+                <div class="abs-par"><i class="fas fa-lightbulb icon"></i>この後のアンケートで、ぜひあなたのアイディアを教えてください。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========= Slide 15 ========= -->
+        <section class="slide" id="s15" aria-label="お知らせとお願い">
+          <div class="grid-bg frame">
+            <div class="slide-title"><div class="title-text">お知らせとお願い</div></div>
+
+            <div class="content-container">
+              <div class="content-row">
+                <div class="number-circle icon-circle"><i class="fas fa-book-open"></i></div>
+                <div class="content-text">
+                  <strong class="content-highlight">復習用コンテンツのご紹介</strong>
+                  <div class="content-description">本日のスライド・デモ・音声解説などをGoogleサイトで共有します。チャットでURLをご確認ください。</div>
+                </div>
+              </div>
+
+              <div class="content-row">
+                <div class="number-circle icon-circle"><i class="fas fa-calendar-alt"></i></div>
+                <div class="content-text">
+                  <strong class="content-highlight">研修第2回の予告</strong>
+                  <span class="date-badge">11月5日(水)</span>
+                  <div class="content-description">内容：「ノーコードで作るアプリ&シミュレーション」— 具体的な手順やコツを学ぶワークショップ。</div>
+                </div>
+              </div>
+
+              <div class="content-row">
+                <div class="number-circle icon-circle"><i class="fas fa-clipboard-list"></i></div>
+                <div class="content-text">
+                  <strong class="content-highlight">事後アンケートご協力のお願い</strong>
+                  <div class="content-description">研修終了後、チャットにてアンケートURLをお送りします。ご協力をお願いいたします。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </div>
   </div>
 
-  <!-- スライドデータ & 連動スクリプト（元のまま） -->
+  <div class="controls" role="toolbar" aria-label="スライド操作">
+    <button class="btn" id="prevBtn" title="前へ（←）"><i class="fas fa-arrow-left"></i></button>
+    <div class="dots" id="dots"></div>
+    <button class="btn" id="nextBtn" title="次へ（→）"><i class="fas fa-arrow-right"></i></button>
+    <span id="counter" aria-live="polite">1 / 15</span>
+  </div>
+
+<script>
+// --- scale canvas to fit viewport (top-left anchored) ---
+const canvas = document.getElementById('canvas');
+function fit(){
+  const stage = canvas.parentElement;
+  const sw = stage.clientWidth, sh = stage.clientHeight;
+  const scale = Math.min(sw/1280, sh/720);
+  canvas.style.transform = `scale(${scale})`; // 左上基準
+}
+new ResizeObserver(fit).observe(document.querySelector('.stage'));
+window.addEventListener('load', fit);
+
+// --- slide logic ---
+const slides = Array.from(document.querySelectorAll('.slide'));
+const n = slides.length;
+const dotsWrap = document.getElementById('dots');
+const counter = document.getElementById('counter');
+let idx = Math.max(0, Math.min(n-1, Number(location.hash.replace('#',''))-1 || 0));
+
+function renderDots(){
+  dotsWrap.innerHTML='';
+  slides.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(i===idx?' active':'');
+    d.title=`スライド ${i+1}`;
+    d.addEventListener('click',()=>show(i));
+    dotsWrap.appendChild(d);
+  });
+}
+function show(i){
+  idx=(i+n)%n;
+  slides.forEach((s,k)=>s.classList.toggle('active',k===idx));
+  renderDots();
+  counter.textContent=`${idx+1} / ${n}`;
+  location.hash=(idx+1).toString();
+}
+document.getElementById('prevBtn').onclick=()=>show(idx-1);
+document.getElementById('nextBtn').onclick=()=>show(idx+1);
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown') show(idx+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')   show(idx-1);
+  if(e.key>='1'&&e.key<='9'){ const t=Number(e.key)-1; if(t<n) show(t); }
+  if(e.key==='0'){ if(n>=10) show(9); }
+});
+window.addEventListener('hashchange',()=>{
+  const h=Number(location.hash.replace('#',''))-1;
+  if(!Number.isNaN(h)) show(h);
+});
+renderDots(); show(idx);
+</script>
+</body>
+</html>
+<!-- 終了 -->
+  </template>
+
+  <!-- ========== テンプレート内容を iframe に流し込む ========== -->
   <script>
-     const slidesData = [
-      { content: `
-        <div class="w-full h-full gradient-bg flex flex-col justify-center items-center text-center p-8">
-          <div class="bg-white/70 backdrop-blur-sm p-8 rounded-xl shadow-lg">
-            <h1 class="text-5xl md:text-6xl font-black gradient-text tracking-tight">生成AI研修</h1>
-            <p class="text-2xl md:text-3xl font-bold text-gray-700 mt-4">全3回 | 初回：活用領域を知る</p>
-          </div>
-          <p class="text-xl text-gray-600 mt-10 font-semibold bg-white/70 backdrop-blur-sm px-6 py-3 rounded-full shadow">2025年10月22日(水) 16:00 - 16:30</p>
-        </div>
-      `},
-      { title: "はじめに - 本研修の目的", content: `
-        <div class="p-8 md:p-12 space-y-8">
-          <div class="card p-6 rounded-xl shadow-lg border border-blue-100">
-            <h3 class="text-2xl font-bold text-blue-600 mb-3">本日の目的</h3>
-            <p class="text-lg md:text-xl leading-relaxed text-gray-700">
-              具体例を通して生成AIの主要な活用領域を理解し、<br>
-              <span class="font-bold">皆さまの業務や授業での活用イメージを持っていただくこと</span>
-            </p>
-          </div>
-          <div class="card p-6 rounded-xl shadow-lg border border-green-100">
-            <h3 class="text-2xl font-bold text-green-600 mb-4">達成目標</h3>
-            <div class="space-y-3">
-              <div class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <p class="text-lg text-gray-700">生成AIでできる代表的なことの<span class="font-bold">全体像を知る</span></p>
-              </div>
-              <div class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <p class="text-lg text-gray-700">ご自身の業務・授業に即した<span class="font-bold">「まず試す」ユースケースを1つ以上メモする</span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      `},
-      { title: "研修の全体像と本日の位置づけ", content: `
-        <div class="p-8 md:p-12 space-y-6">
-          <div class="flex items-center p-6 rounded-xl shadow-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white transform scale-105">
-            <div class="text-4xl font-black mr-6">1</div>
-            <div>
-              <h3 class="text-2xl font-bold">第1回 (本日)：活用領域を知る</h3>
-              <p class="mt-1 opacity-90">生成AIで「何ができるのか」という全体像を掴みます。</p>
-            </div>
-          </div>
-          <div class="flex items-center p-6 rounded-xl shadow-lg bg-white/80 border">
-            <div class="text-4xl font-black mr-6 text-gray-400">2</div>
-            <div>
-              <h3 class="text-2xl font-bold text-gray-700">第2回：ノーコードで作るアプリ&シミュレーション</h3>
-              <p class="mt-1 text-gray-600">具体的なアプリ開発の手順やコツを学ぶワークショップです。<br><span class="font-semibold text-indigo-500">(予告) 11月5日(水) 開催予定</span></p>
-            </div>
-          </div>
-          <div class="flex items-center p-6 rounded-xl shadow-lg bg-white/80 border">
-            <div class="text-4xl font-black mr-6 text-gray-400">3</div>
-            <div>
-              <h3 class="text-2xl font-bold text-gray-700">第3回：(テーマ未定)</h3>
-            </div>
-          </div>
-        </div>
-      `},
-      { title: "本日の流れ (30分)", content: `
-        <div class="p-8 md:p-12">
-          <ul class="space-y-4 text-xl">
-            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">1.</span> <span class="font-bold">イントロ</span><span class="ml-auto text-gray-500 font-semibold"> (3分)</span></li>
-            <p class="pl-20 text-lg text-gray-600 -mt-2">目的、位置づけ、アジェンダの確認</p>
-
-            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">2.</span> <span class="font-bold">生成AIを利用する際の注意点</span><span class="ml-auto text-gray-500 font-semibold"> (5分)</span></li>
-
-            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">3.</span> <span class="font-bold">生成AIでできること</span><span class="ml-auto text-gray-500 font-semibold"> (15分)</span></li>
-            <p class="pl-20 text-lg text-gray-600 -mt-2">具体的な活用事例をデモ中心にご紹介します</p>
-
-            <li class="flex items-center"><span class="font-black text-blue-500 text-3xl w-20">4.</span> <span class="font-bold">まとめ</span><span class="ml-auto text-gray-500 font-semibold"> (5分)</span></li>
-          </ul>
-        </div>
-      `},
-      { section: "2.", title: "生成AIを利用する際の注意点", content: `
-        <div class="p-8 md:p-12">
-          <p class="text-xl text-gray-600 mb-8">はじめに、安全かつ効果的に活用するための重要なポイント</p>
-          <div class="space-y-6">
-            <div class="card p-6 rounded-xl shadow-lg flex items-start">
-              <svg width="32" height="32" viewBox="0 0 24 24" class="text-blue-500 mr-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-              <div>
-                <h3 class="text-xl font-bold text-gray-800">道立学校における生成AI利活用ガイドブックの紹介</h3>
-                <p class="text-lg text-gray-600 mt-1">まずは基本となるルールを確認しましょう。</p>
-              </div>
-            </div>
-            <div class="card p-6 rounded-xl shadow-lg flex items-start">
-              <svg width="32" height="32" viewBox="0 0 24 24" class="text-amber-500 mr-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-              <div>
-                <h3 class="text-xl font-bold text-gray-800">道教委回答を基にした解説</h3>
-                <p class="text-lg text-gray-600 mt-1">個人情報や著作権など、特に注意すべき点について解説します。</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      `},
-      { title: "生成AIでできること", content: `
-        <div class="p-8 md:p-12">
-          <p class="text-xl text-gray-600 mb-8">本日のメインパートです。デモンストレーションを交えながら、具体的な活用例を見ていきましょう。</p>
-          <h3 class="text-2xl font-bold text-center mb-6 gradient-text">主な活用領域</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
-              <h4 class="text-xl font-bold text-blue-600">探索・選別・構造化</h4>
-            </div>
-            <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
-              <h4 class="text-xl font-bold text-green-600">制作</h4>
-            </div>
-            <div class="card p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
-              <h4 class="text-xl font-bold text-purple-600">共有・運用</h4>
-            </div>
-          </div>
-        </div>
-      `},
-      { subtitle: "a) 探索・選別・構造化", content: `
-        <div class="p-8 md:p-12">
-          <p class="text-xl text-gray-600 mb-8">膨大な情報の中から、必要な情報を見つけ出し、整理・構造化する</p>
-          <div class="space-y-4">
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
-              <h3 class="text-lg font-bold text-blue-800">デモ1：Deep Research</h3>
-              <p class="text-lg text-blue-700 mt-2">複雑なテーマについて、AIが自動で深くリサーチし、レポートを作成する様子をご紹介します。</p>
-            </div>
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
-              <h3 class="text-lg font-bold text-blue-800">デモ2：NotebookLM</h3>
-              <p class="text-lg text-blue-700 mt-2">資料から音声要約、マインドマップ、レポート、学習ガイド、フラッシュカードなどを自動生成します。</p>
-            </div>
-          </div>
-        </div>
-      `},
-      { subtitle: "b) 制作", content: `
-        <div class="p-8 md:p-12">
-          <p class="text-xl text-gray-600 mb-6">文章、画像、教材、アプリなど、様々なコンテンツを創り出す</p>
-          <div class="space-y-4">
-            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ1：nano banana</span><br>簡単な指示で画像を生成・編集します。</div>
-            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ2：Google Storybook</span><br>AIと対話しながらオリジナルの絵本を作成します。</div>
-          </div>
-        </div>
-      `},
-      { subtitle: "b) 制作（続き）", content: `
-        <div class="p-8 md:p-12">
-          <div class="space-y-4 text-lg">
-            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ3：類似テキスト・類題の作成</span><br>既存の文章や問題から、似た形式のものを複数作成します。</div>
-            <div class="card p-4 rounded-lg"><span class="font-bold text-green-600">デモ4：Google AI検索</span><br>校外学習や旅行などの行程を対話形式で作成します。</div>
-          </div>
-        </div>
-      `},
-      { subtitle: "b) 制作（続き）：ノーコードで開発するアプリ・シミュレーション", content: `
-        <div class="p-8 md:p-12">
-          <p class="text-lg text-gray-600 mb-6">プログラミング不要で、教育用ツールを開発できます</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-bold text-xl text-indigo-600 mb-2">(1) 個別最適な学習の支援</h4>
-              <ul class="list-disc list-inside space-y-1 text-gray-700">
-                <li>英単語学習アプリ</li>
-                <li>地図パズル</li>
-                <li>平方完成ゲーム</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-bold text-xl text-rose-600 mb-2">(2) 協働的な学習の支援</h4>
-              <ul class="list-disc list-inside space-y-1 text-gray-700">
-                <li>音楽カードアプリ</li>
-                <li>レールトラックシミュレーター</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      `},
-      { subtitle: "b) 制作（続き）：ノーコードで開発するアプリ・シミュレーション", content: `
-        <div class="p-8 md:p-12">
-          <div>
-            <h4 class="font-bold text-xl text-teal-600 mb-2">(3) 内容理解の支援</h4>
-            <ul class="list-disc list-inside space-y-1 text-gray-700 text-lg">
-              <li>A/D変換シミュレーション</li>
-              <li>ヤングの実験シミュレーション</li>
-            </ul>
-          </div>
-        </div>
-      `},
-      { subtitle: "c) 共有・運用", content: `
-        <div class="p-8 md:p-12">
-          <p class="text-xl text-gray-600 mb-8">情報の配信や管理を自動化・効率化する</p>
-          <div class="space-y-6">
-            <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
-              <h3 class="text-lg font-bold text-purple-800">デモ1：自分専用メルマガの受信</h3>
-              <p class="text-lg text-purple-700 mt-2">興味のある分野の最新情報を、AIがまとめて毎日届けてくれます。</p>
-            </div>
-            <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
-              <h3 class="text-lg font-bold text-purple-800">デモ2：課題の自動配信</h3>
-              <p class="text-lg text-purple-700 mt-2">設定したルールに基づき、学習者に課題を自動で配信・管理します。</p>
-            </div>
-          </div>
-        </div>
-      `},
-      { section: "4.", title: "まとめ", content: `
-        <div class="p-8 md:p-12 space-y-6">
-          <div class="card p-6 rounded-xl">
-            <h3 class="text-xl font-bold text-gray-800 mb-3">本日のポイント</h3>
-            <ul class="list-disc list-inside space-y-2 text-lg">
-              <li>生成AIは<span class="font-bold text-blue-600">「探索」</span><span class="font-bold text-green-600">「制作」</span><span class="font-bold text-purple-600">「運用」</span>など、多様な領域で活用できます。</li>
-              <li>デモでご紹介したように、専門知識がなくても直感的に使えるツールが多数あります。</li>
-            </ul>
-          </div>
-          <div class="card p-6 rounded-xl">
-            <h3 class="text-xl font-bold text-gray-800 mb-3">達成目標の確認</h3>
-            <ol class="list-decimal list-inside space-y-2 text-lg">
-              <li>生成AIでできる代表的なことの全体像を知ることができましたか？</li>
-              <li>ご自身の業務・授業に即した「まず試す」ユースケースを1つ以上メモできましたか？</li>
-            </ol>
-          </div>
-        </div>
-      `},
-      { title: "さあ、次はあなたの番です", content: `
-        <div class="p-8 md:p-12 text-center flex flex-col items-center justify-center h-full">
-          <h2 class="text-4xl font-black gradient-text">「まず試す」ユースケースを考えてみましょう</h2>
-          <div class="text-xl mt-8 space-y-3 text-gray-700">
-            <p>本日のデモで興味を持ったものはありましたか？</p>
-            <p>ご自身の業務や授業で「これなら試せそう」と思ったことは何ですか？</p>
-          </div>
-          <p class="mt-10 bg-yellow-100 text-yellow-800 font-bold px-6 py-3 rounded-lg">
-            この後のアンケートで、ぜひあなたのアイディアを教えてください。
-          </p>
-        </div>
-      `},
-      { title: "お知らせとお願い", content: `
-        <div class="p-8 md:p-12 space-y-5">
-          <div class="card p-5 rounded-lg flex items-start">
-            <svg width="24" height="24" viewBox="0 0 24 24" class="text-blue-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            <div>
-              <h3 class="font-bold text-lg">復習用コンテンツのご紹介</h3>
-              <p class="text-gray-600">本日のスライド、デモ用コンテンツ、音声解説などをGoogleサイトで共有します。チャットでURLをご確認ください。</p>
-            </div>
-          </div>
-          <div class="card p-5 rounded-lg flex items-start">
-            <svg width="24" height="24" viewBox="0 0 24 24" class="text-green-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-            <div>
-              <h3 class="font-bold text-lg">研修第2回の予告</h3>
-              <p class="text-gray-600"><span class="font-semibold">日時：</span>11月5日(水)<br><span class="font-semibold">内容：</span>「ノーコードで作るアプリ&シミュレーション」 - アプリ開発の具体的な手順やコツを学ぶワークショップです。</p>
-            </div>
-          </div>
-          <div class="card p-5 rounded-lg flex items-start">
-            <svg width="24" height="24" viewBox="0 0 24 24" class="text-yellow-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-            <div>
-              <h3 class="font-bold text-lg">事後アンケートご協力のお願い</h3>
-              <p class="text-gray-600">研修終了後、チャットにてアンケートURLをお送りします。ご協力をお願いいたします。</p>
-            </div>
-          </div>
-        </div>
-      `}
-    ];
-
-    const container = document.getElementById('presentation-container');
-    let currentSlide = 0;
-
-    function createSlide(slideData, index) {
-      const slideEl = document.createElement('div');
-      slideEl.className = `slide w-full h-full flex-shrink-0 flex-col p-6 sm:p-8 ${index === 0 ? 'active' : ''}`;
-      slideEl.style.backgroundColor = slideData.content.includes('gradient-bg')
-        ? 'transparent'
-        : (document.documentElement.classList.contains('dark') ? '#0a0a0a' : '#f8fafc');
-
-      if (slideData.content.includes('gradient-bg')) {
-        slideEl.innerHTML = slideData.content;
-      } else {
-        let headerHTML = '';
-        if (slideData.title) {
-          headerHTML += `<h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-neutral-100 pb-4 border-b-4 border-blue-300 mb-6"><span class="title-highlight">${slideData.title}</span></h2>`;
-        }
-        if (slideData.section) {
-          headerHTML = `
-            <div class="flex items-baseline mb-6 pb-4 border-b-4 border-blue-300">
-              <span class="text-4xl md:text-5xl font-black gradient-text mr-4">${slideData.section}</span>
-              <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-neutral-100"><span class="title-highlight">${slideData.title}</span></h2>
-            </div>
-          `;
-        }
-        if (slideData.subtitle) {
-          headerHTML = `
-            <div class="mb-6 pb-4 border-b-2 border-gray-200 dark:border-white/10">
-              <h2 class="text-xl md:text-2xl font-bold text-gray-700 dark:text-neutral-200">${slideData.subtitle}</h2>
-            </div>
-          `;
-        }
-        slideEl.innerHTML = `
-          ${headerHTML}
-          <div class="flex-grow text-gray-800 dark:text-neutral-100">
-            ${slideData.content}
-          </div>
-        `;
-      }
-      return slideEl;
-    }
-
-    const slideElements = slidesData.map(createSlide);
-    slideElements.forEach(el => container.appendChild(el));
-
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const slideCounter = document.getElementById('slide-counter');
-
-    function updateSlideView() {
-      slideElements.forEach((slide, index) => {
-        slide.classList.toggle('active', index === currentSlide);
-      });
-      slideCounter.textContent = `スライド ${currentSlide + 1} / ${slidesData.length}`;
-      prevBtn.disabled = currentSlide === 0;
-      nextBtn.disabled = currentSlide === slidesData.length - 1;
-      prevBtn.classList.toggle('opacity-40', prevBtn.disabled);
-      nextBtn.classList.toggle('opacity-40', nextBtn.disabled);
-    }
-
-    prevBtn.addEventListener('click', () => {
-      if (currentSlide > 0) {
-        currentSlide--;
-        updateSlideView();
-      }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (currentSlide < slidesData.length - 1) {
-        currentSlide++;
-        updateSlideView();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') nextBtn.click();
-      else if (e.key === 'ArrowLeft') prevBtn.click();
-    });
-
-    updateSlideView();
+    const g1 = document.getElementById('tpl-gemini').innerHTML;
+    const g2 = document.getElementById('tpl-genspark').innerHTML;
+    document.getElementById('geminiFrame').srcdoc = g1;
+    document.getElementById('gensparkFrame').srcdoc = g2;
   </script>
 </body>
 </html>
-
-
-
-
