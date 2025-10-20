@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>自分専用メルマガの受信 デモ | Tonden AI Learning Hub</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <!-- Tailwind (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "Noto Sans", "sans-serif"],
+            sans: ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          boxShadow: { soft: "0 10px 30px -10px rgba(0,0,0,0.15)" }
+        },
+      },
+    };
+  </script>
+  <style>
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); }
+    .dark .glass { background: rgba(16,28,34,0.6); }
+    .caption { font-size: 0.9rem; opacity: .75; }
+    .img-frame { background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)); }
+    .dark .img-frame { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    .lead { font-size: 1.05rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .badge { border: 1px solid rgba(0,0,0,.08); }
+    .dark .badge { border: 1px solid rgba(255,255,255,.12); }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-neutral-800 dark:text-neutral-200">
+  <!-- === 共通ツールバー === -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-background-dark/70 backdrop-blur border-b border-black/5 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="./" class="flex items-center gap-2 group">
+          <span class="text-lg md:text-xl font-black tracking-tight text-neutral-900 dark:text-white">
+            Tonden <span class="text-primary">AI</span> Learning Hub
+          </span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
+          <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
+          <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
+          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 本文 -->
+  <main class="pt-16">
+    <section class="relative">
+      <div class="max-w-5xl mx-auto px-4 md:px-8 py-10 md:py-16">
+        <!-- Hero -->
+        <div class="text-center space-y-4 mb-10 md:mb-14">
+          <h1 class="text-3xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white font-display">
+            自分専用メルマガの受信 デモ
+          </h1>
+          <p class="lead text-neutral-700 dark:text-neutral-300 max-w-3xl mx-auto">
+            AIワークフロービルダー（<strong>sim AI</strong>）で、あなたの興味関心に合わせた最新ニュースを収集・要約し、<strong>解説付きで自動メール配信</strong>する仕組みを作ります。
+          </p>
+          <div class="flex items-center justify-center gap-2 flex-wrap">
+            <span class="badge px-3 py-1 rounded-full text-xs bg-white/60 dark:bg-white/10">AIエージェント</span>
+            <span class="badge px-3 py-1 rounded-full text-xs bg-white/60 dark:bg-white/10">自動化</span>
+            <span class="badge px-3 py-1 rounded-full text-xs bg-white/60 dark:bg-white/10">ニュースレター</span>
+            <span class="badge px-3 py-1 rounded-full text-xs bg-white/60 dark:bg-white/10">自然言語で開発</span>
+          </div>
+        </div>
+
+        <!-- 概要カード -->
+        <div class="grid gap-4 md:gap-6 md:grid-cols-3 mb-12">
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">newspaper</span>
+              <div>
+                <h3 class="font-bold">広範な情報源</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  ニュースサイトだけでなく、YouTubeやSNSも対象に収集・要約。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">insights</span>
+              <div>
+                <h3 class="font-bold">解説付き配信</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  重要ポイント・影響・背景を短く噛み砕いて毎朝メールで配信。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary">schedule</span>
+              <div>
+                <h3 class="font-bold">完全自動化</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
+                  スケジュール設定・失敗時の再実行・ログ記録までワンストップ。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ステップ1：ワークフロー作成（画像1） -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">1</span>
+            <h2 class="text-xl md:text-2xl font-bold">sim AIでワークフローを作成</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            <strong>sim AI</strong> のキャンバスで以下のステップをつなぎ、ニュース収集〜要約〜メール送信まで自動化します。
+            <br><strong>ポイント：</strong>sim AIは<strong>自然言語でチャットすることで開発可能</strong>です。ブロックの追加や接続、条件分岐の作成、変数の設定などをチャットで指示し、後からGUIで微調整できます。
+          </p>
+          <ol class="list-decimal list-inside space-y-2 text-neutral-700 dark:text-neutral-300 mb-4">
+            <li>収集：RSS / Web検索 / YouTube / SNS API から最新トピックを取得</li>
+            <li>評価：重複除去・信頼度・鮮度でスコアリング</li>
+            <li>要約：5〜7本に絞り、見出し＋1段落解説＋出典リンクを生成</li>
+            <li>配信：メール（またはSlack/Chat）に成形して送信</li>
+          </ol>
+          <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+            <img src="./assets/images/newsletter-1.png" alt="sim AIでのワークフロー構築画面の例" class="w-full object-cover">
+          </figure>
+          <figcaption class="caption mt-2">画像1：ワークフロー構成例（差し替え可）</figcaption>
+        </section>
+
+        <!-- ステップ2：毎朝の自動配信（画像2） -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">2</span>
+            <h2 class="text-xl md:text-2xl font-bold">毎朝の自動収集と配信</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            スケジューラで毎朝の実行時刻を設定しておけば、AIが自動で調査・要約し、<strong>解説付きメルマガ</strong>として届けます。
+          </p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <figure class="rounded-xl overflow-hidden border border-black/5 dark:border-white/10 img-frame shadow-soft">
+              <img src="./assets/images/newsletter-2.png" alt="自動配信用のスケジュール設定例" class="w-full object-cover">
+              <figcaption class="caption p-3">画像2：スケジュール設定（差し替え可）</figcaption>
+            </figure>
+            <div class="glass rounded-xl p-5 border border-black/5 dark:border-white/10">
+              <h3 class="font-semibold mb-2">メール本文のテンプレ例（Markdown）</h3>
+              <pre class="p-3 bg-black/5 dark:bg-white/10 rounded-lg overflow-x-auto text-sm"><code>## 今日のトピック（{yyyy-mm-dd}）
+1. {見出し} — {一文要約}
+   - 解説：{背景/影響}
+   - 出典：{URL}
+2. {見出し} …</code></pre>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-3">
+                件名例：<code>[Daily AI News] {yyyy-mm-dd}</code>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ステップ3：他の自動化例 -->
+        <section class="mb-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">3</span>
+            <h2 class="text-xl md:text-2xl font-bold">応用：他のAIワークフローも自動化</h2>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            ニュース配信のほか、教育向けの自動化も可能です。以下は一例です。
+          </p>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary">quiz</span>
+                <div>
+                  <h3 class="font-semibold">毎授業小テスト生成</h3>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">教科・単元・到達目標から自動で小テスト作成。</p>
+                </div>
+              </div>
+            </div>
+            <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary">menu_book</span>
+                <div>
+                  <h3 class="font-semibold">時事読解問題</h3>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">最新ニュースをもとに読解問題＋解説を自動生成。</p>
+                </div>
+              </div>
+            </div>
+            <div class="glass rounded-xl p-5 shadow-soft border border-black/5 dark:border-white/10">
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary">auto_stories</span>
+                <div>
+                  <h3 class="font-semibold">復習資料の定期配信</h3>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">誤答分析に基づく復習教材を自動で配布。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 注意点 -->
+        <section class="glass rounded-xl p-6 md:p-8 shadow-soft border border-black/5 dark:border-white/10 mb-12">
+          <h3 class="text-lg md:text-xl font-bold mb-4">運用上の注意（大事）</h3>
+          <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
+            <li><strong>情報源と出典</strong>：ニュース元の信頼性・出典URLの明記を徹底。</li>
+            <li><strong>著作権</strong>：引用範囲・転載可否を確認。要約時も配慮。</li>
+            <li><strong>個人情報</strong>：メール配信先の管理・退会導線の用意。</li>
+          </ul>
+        </section>
+
+        <!-- Back / 備考 -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <a href="./demo.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900 text-white hover:opacity-90 dark:bg-white dark:text-neutral-900 transition">
+            <span class="material-symbols-outlined">arrow_back</span>
+            デモ一覧へ戻る
+          </a>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            画像は <code>/assets/images/newsletter-1.png</code> / <code>newsletter-2.png</code> を差し替えてください。
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
