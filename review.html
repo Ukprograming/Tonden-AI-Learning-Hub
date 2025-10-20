@@ -52,7 +52,7 @@
           <a href="./" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">ホーム</a>
           <a href="./slide.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">研修スライド</a>
           <a href="./demo.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">デモ用コンテンツ</a>
-          <a href="./review.html" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium text-black/75 hover:text-primary hover:bg-primary/10 dark:text-white/80 dark:hover:text-primary transition-colors">復習用コンテンツ</a>
+          <a href="./review.html" aria-current="page" class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary hover:bg-primary/15 dark:text-primary transition-colors">復習用コンテンツ</a>
         </nav>
       </div>
     </div>
@@ -66,7 +66,7 @@
         <div class="mb-10 text-center">
           <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white">復習用コンテンツ</h1>
           <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300">
-            研修で扱ったスライド・デモ・配布資料・音声などをまとめています。必要に応じて随時更新します。
+            研修で扱ったスライド・デモ・資料・音声などをまとめています。必要に応じて随時更新します。
           </p>
         </div>
 
@@ -114,35 +114,77 @@
                   <p class="font-semibold">ノーコードで作るアプリ/シミュレーション</p>
                   <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">英単語・地図パズル・平方完成・音楽カード・レールトラック・A/D変換・ヤングの実験</p>
                 </li>
+                <!-- 追加：共有・運用 -->
+                <li class="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/70 dark:border-neutral-800">
+                  <p class="font-semibold">共有・運用（AIワークフローの構築）</p>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">AIニュース配信・自動化ワークフロー など</p>
+                </li>
               </ul>
             </div>
           </section>
 
-          <!-- 配布資料（任意：URLを後で差し替え） -->
+          <!-- 資料 -->
           <section class="rounded-xl border border-neutral-200/80 bg-white dark:border-neutral-800 dark:bg-neutral-900/50 shadow-sm">
             <div class="p-6">
               <h2 class="flex items-center gap-3 text-2xl font-bold text-neutral-900 dark:text-white">
                 <span class="material-symbols-outlined text-primary text-3xl">folder_open</span>
-                配布資料・リンク集
+                資料
               </h2>
             </div>
-            <div class="border-t border-neutral-200/80 dark:border-neutral-800 p-6">
-              <ul class="space-y-3 text-primary">
-                <!-- 空リンクは準備中表示にしておくと親切です -->
-                <li>
-                  <a href="#" class="pointer-events-none opacity-50 no-underline text-primary">
-                    研修サマリー（PDF）— 準備中
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="pointer-events-none opacity-50 no-underline text-primary">
-                    参考リンク集 — 準備中
-                  </a>
-                </li>
-              </ul>
-              <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
-                ※ URLは後日更新します。準備ができ次第、クリックできるようになります。
-              </p>
+            <div class="border-t border-neutral-200/80 dark:border-neutral-800 p-6 space-y-8">
+              <!-- 道教委のページ（外部リンク） -->
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-neutral-100">道教委　生成AIの利活用に関するページ</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                  外部サイトを新しいタブで開きます。
+                </p>
+                <a
+                  href="https://www.dokyoi.pref.hokkaido.lg.jp/hk/ict/seiseiai.html/"
+                  target="_blank" rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 mt-2 text-primary hover:underline"
+                >
+                  開く <span class="material-symbols-outlined text-base">open_in_new</span>
+                </a>
+                <!-- ※正式なURLが別にある場合は href を差し替えてください -->
+              </div>
+
+              <!-- 本日のまとめ記事（概要版） PDF -->
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-neutral-100">本日のまとめ記事（概要版）</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                  PDFをページ内で閲覧できます。ダウンロードも可能です。
+                </p>
+                <div class="mt-3 rounded-lg border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+                  <iframe
+                    src="./assets/docs/summary-overview.pdf#view=FitH"
+                    class="w-full"
+                    style="aspect-ratio: 16 / 9; min-height: 420px;"
+                  ></iframe>
+                </div>
+                <a href="./assets/docs/summary-overview.pdf" download
+                   class="inline-flex items-center gap-1 mt-2 text-primary hover:underline">
+                  ダウンロード <span class="material-symbols-outlined text-base">download</span>
+                </a>
+              </div>
+
+              <!-- 本日のまとめ（ブログ版） PDF -->
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-neutral-100">本日のまとめ（ブログ版）</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                  PDFをページ内で閲覧できます。ダウンロードも可能です。
+                </p>
+                <div class="mt-3 rounded-lg border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+                  <iframe
+                    src="./assets/docs/summary-blog.pdf#view=FitH"
+                    class="w-full"
+                    style="aspect-ratio: 16 / 9; min-height: 420px;"
+                  ></iframe>
+                </div>
+                <a href="./assets/docs/summary-blog.pdf" download
+                   class="inline-flex items-center gap-1 mt-2 text-primary hover:underline">
+                  ダウンロード <span class="material-symbols-outlined text-base">download</span>
+                </a>
+              </div>
             </div>
           </section>
 
